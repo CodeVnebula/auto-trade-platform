@@ -1,0 +1,9 @@
+venv/ 
+.env 
+
+# Byte-compiled / optimized / DLL files
+*.pyc
+*.pyo
+
+# sqlite database file
+*.sqlite3
