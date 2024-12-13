@@ -7,3 +7,8 @@ venv/
 
 # sqlite database file
 *.sqlite3
+
+
+data/
+cache/
+blueprint.txt
