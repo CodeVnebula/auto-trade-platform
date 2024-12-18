@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Upload Car Listing Photos</title>
+</head>
+<body>
+    <h1>Upload Car Listing Photos</h1>
+    
+    <form id="uploadForm" method="post" enctype="multipart/form-data">
+        {% csrf_token %}
+        <label for="photos">Choose Photos (You can select multiple):</label>
+        <input type="file" id="photos" name="photos" multiple required> <!-- Corrected file input -->
+        
+        <!-- Hidden input for Car Listing ID -->
+        <input type="hidden" id="carListingId" value="7"> <!-- Replace '3' dynamically if needed -->
+
+        <br><br>
+        <button type="submit">Upload Photos</button>
+    </form>
+
+    <script>
+        document.getElementById('uploadForm').addEventListener('submit', function(event) {
+            event.preventDefault();
+        
+            var formData = new FormData();
+            var photos = document.getElementById('photos').files;
+            var carListingId = document.getElementById('carListingId').value;
+        
+            // Append each photo to the form data
+            for (var i = 0; i < photos.length; i++) {
+                formData.append('photos', photos[i]);
+            }
+        
+            // Get CSRF token from the template
+            var csrfToken = document.querySelector('[name=csrfmiddlewaretoken]').value;
+        
+            fetch(`http://127.0.0.1:8000/api/car-listings/upload-photos/${carListingId}`, {
+                method: 'POST',
+                headers: {
+                    'X-CSRFToken': csrfToken
+                },
+                body: formData
+            })
+            .then(response => {
+                if (response.ok) {
+                    return response.json();
+                } else {
+                    throw new Error('Network response was not ok.');
+                }
+            })
+            .then(data => {
+                console.log('Success:', data);
+                alert('Photos uploaded successfully!');
+            })
+            .catch((error) => {
+                console.error('Error:', error);
+                alert(`An error occurred: ${error.message}`);
+            });
+        });
+    </script>
+</body>
+</html>

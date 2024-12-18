@@ -12,7 +12,8 @@ from rest_framework.response import Response
 from .serializers import (
     SignupSerializer,
     ResetPasswordSerializer,
-    ResetPasswordRequestSerializer
+    ResetPasswordRequestSerializer,
+    SendConfirmationCodeSerializer
 )
 
 from django.shortcuts import get_object_or_404
@@ -54,7 +55,7 @@ class ResetPasswordView(APIView):
     serializer_class = ResetPasswordSerializer
     http_method_names = ['put']
     
-    def get(self, request, uidb64, token):
+    def get(self, _, uidb64, token):
         try:
             uid = force_str(urlsafe_base64_decode(uidb64))
             user = User.objects.get(pk=uid)
@@ -75,9 +76,10 @@ class ResetPasswordView(APIView):
                 status=status.HTTP_400_BAD_REQUEST
             )
 
-    def get_object(self):
+    def get_object(self, uidb64, token):
         uidb64 = self.kwargs.get('uidb64')
         token = self.kwargs.get('token')
+        print(self.kwargs)
         try:
             uid = force_str(urlsafe_base64_decode(uidb64))
             user = User.objects.get(pk=uid)
@@ -86,15 +88,16 @@ class ResetPasswordView(APIView):
         except Exception:
             return None
 
-    def update(self, request, *args, **kwargs):
-        instance = self.get_object()
+    def put(self, request, uidb64, token):
+        instance = self.get_object(uidb64, token)
+        print(instance)
         if not instance:
             return Response(
                 {'detail': 'Invalid token or user not found.'},
                 status=status.HTTP_400_BAD_REQUEST
             )
             
-        serializer = self.get_serializer(data=request.data)
+        serializer = self.serializer_class(data=request.data, context={'user': instance})
         if serializer.is_valid():
             serializer.save(user=instance)
             return Response(
@@ -131,3 +134,14 @@ class EmailVerifyView(APIView):
                 status=status.HTTP_400_BAD_REQUEST
             )
             
+class SendConfirmationCodeView(CreateAPIView):
+    permission_classes = [IsAuthenticated]
+    serializer_class = SendConfirmationCodeSerializer
+
+    def post(self, request):
+        serializer = self.serializer_class(data=request.data, context={'request': request})
+        if serializer.is_valid():
+            result = serializer.save()  
+            return Response(result, status=status.HTTP_200_OK)
+        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+    

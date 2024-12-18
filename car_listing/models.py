@@ -4,9 +4,9 @@ from django.core.validators import (
     MaxValueValidator,
     MaxLengthValidator
 )
-from django.forms import ValidationError
 
 from auto_market.validators import validate_photo_size
+
 
 
 class VehicleType(models.Model):
@@ -277,7 +277,7 @@ class CarPrice(models.Model):
         ('GEL', 'GEL'),
     ]
     
-    price = models.PositiveIntegerField(blank=False, null=False)
+    price = models.PositiveIntegerField(blank=True, null=True)
     currency = models.CharField(max_length=3, choices=CURRENCY_CHOICES)  
     price_negotiable = models.BooleanField(default=False)  
     exchange_for_another_car = models.BooleanField(default=False)
@@ -302,34 +302,34 @@ class CarListing(models.Model):
         null=True, 
         blank=True
     )
-    is_cleared = models.BooleanField(default=False)
-    is_inspected = models.BooleanField(default=False)
     price = models.ForeignKey(CarPrice, on_delete=models.CASCADE)
-    photos = models.ManyToManyField('CarPhoto', blank=True)
+    # photos = models.ManyToManyField('CarPhoto', blank=True)
     video_link = models.URLField(blank=True, null=True)
     contact_name = models.CharField(max_length=100, blank=False, null=False)
     contact_phone = models.CharField(max_length=15, blank=False, null=False)
     contact_email = models.EmailField(blank=True, null=True)
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
+    is_cleared = models.BooleanField(default=False)
+    is_inspected = models.BooleanField(default=False)
     is_active = models.BooleanField(default=False)
     views = models.PositiveIntegerField(default=0)  
         
-    def save(self, *args, **kwargs):
-        if self.photos.count() > 15:
-            raise ValidationError("A maximum of 15 photos is allowed.")
-        super().save(*args, **kwargs)
+    # def save(self, *args, **kwargs):
+    #     if self.photos.count() > 15:
+    #         raise ValidationError("A maximum of 15 photos is allowed.")
+    #     super().save(*args, **kwargs)
     
     def __str__(self):
         return f"Car Listing {self.id} by {self.author}"
     
     
 class CarPhoto(models.Model):
-    car = models.ForeignKey(CarListing, on_delete=models.CASCADE)
     photo = models.ImageField(
         upload_to='cars_photos/', 
         validators=[validate_photo_size]
     )
+    car = models.ForeignKey(CarListing, on_delete=models.CASCADE, related_name='photos')
 
     def __str__(self):
         return f"Photo {self.id} for Car {self.car.id}"

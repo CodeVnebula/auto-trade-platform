@@ -12,3 +12,5 @@ venv/
 data/
 cache/
 blueprint.txt
+
+media/

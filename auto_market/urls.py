@@ -20,12 +20,17 @@ from debug_toolbar.toolbar import debug_toolbar_urls
 
 from .swagger import schema_view
 
+from django.conf import settings
+from django.conf.urls.static import static
+
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('api/', include(
         [
             path('', include('authentication.urls', namespace='auth')),
             path('', include('car_listing.urls', namespace='car_listing')),
+            path('myprofile/', include('userprofile.urls', namespace='profiles')),
+            path('messaging/', include('messaging.urls', namespace='messaging')),
         ]
     )),
     path(
@@ -34,3 +39,6 @@ urlpatterns = [
         name='schema-swagger-ui'
     ),
 ] + debug_toolbar_urls()
+
+if settings.DEBUG:  
+    urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

@@ -52,6 +52,7 @@ INSTALLED_APPS = [
     'authentication',
     'car_listing',
     'messaging',
+    'userprofile',
 ]
 
 AUTH_USER_MODEL = 'authentication.User'
@@ -74,7 +75,7 @@ ROOT_URLCONF = 'auto_market.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [],
+        'DIRS': [BASE_DIR / 'templates'],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -142,6 +143,9 @@ STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
 #     os.path.join(BASE_DIR, 'static')
 # ]
 
+MEDIA_URL = '/media/'
+MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
+
 # Default primary key field type
 # https://docs.djangoproject.com/en/5.1/ref/settings/#default-auto-field
 
@@ -189,7 +193,7 @@ EMAIL_HOST_PASSWORD = config('EMAIL_HOST_PASSWORD')
 CACHES = {
     'default': {
         'BACKEND': 'django.core.cache.backends.filebased.FileBasedCache',
-        'LOCATION': 'cache/',  # Directory to store cache files
+        'LOCATION': os.path.join(BASE_DIR, 'cache'),  # Directory to store cache files
         'OPTIONS': {
             'MAX_ENTRIES': 1000,  # Maximum number of cache entries before it starts removing old ones
         }

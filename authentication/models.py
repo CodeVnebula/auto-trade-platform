@@ -77,3 +77,15 @@ class Profile(models.Model):
     def __str__(self):
         return f"{self.user.first_name}'s Profile"
     
+    
+from django.utils import timezone
+from django.conf import settings
+
+class EmailConfirmation(models.Model):
+    email = models.EmailField()
+    code = models.CharField(max_length=6)
+    user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
+    created_at = models.DateTimeField(default=timezone.now)
+    
+    def is_expired(self):
+        return timezone.now() > self.created_at + timezone.timedelta(minutes=10)

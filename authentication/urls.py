@@ -4,7 +4,8 @@ from authentication.views import (
     SignupView,
     EmailVerifyView,
     ResetPasswordView,
-    ResetPasswordRequestView
+    ResetPasswordRequestView,
+    SendConfirmationCodeView
 )
 
 app_name = 'auth'
@@ -26,7 +27,8 @@ urlpatterns = [
                 path('reset-password-request/', ResetPasswordRequestView.as_view(), name='reset_password_request'),
                 path('token/refresh/', TokenRefreshView.as_view(), name='token_refresh'),
                 path('token/verify/', TokenVerifyView.as_view(), name='token_verify'),
-                path('email-verify/<uidb64>/<token>/', EmailVerifyView.as_view(), name='email_verify')
+                path('email-verify/<uidb64>/<token>/', EmailVerifyView.as_view(), name='email_verify'),
+                path('send-confirmation-code/', SendConfirmationCodeView.as_view(), name='send-confirmation-code')
             ]
         )
     ),

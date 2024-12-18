@@ -1,3 +1,4 @@
+import random
 from django.conf import settings
 from rest_framework import serializers
 
@@ -8,8 +9,10 @@ from django.utils.encoding import force_bytes, force_str
 from django.utils.http import urlsafe_base64_decode, urlsafe_base64_encode
 
 from .models import User, Profile
-
+from userprofile.models import CompareListings, FacouriteListings
+from messaging.models import UserChats
 from auto_market.utils import contains_prohibited_words
+from .models import EmailConfirmation
 
 
 class SignupSerializer(serializers.ModelSerializer):
@@ -62,7 +65,12 @@ class SignupSerializer(serializers.ModelSerializer):
         user.save()
         profile = Profile.objects.create(user=user)
         profile.save()
-        
+        compare_listings = CompareListings.objects.create(user=user)
+        compare_listings.save()
+        facourite_listings = FacouriteListings.objects.create(user=user)
+        facourite_listings.save()
+        user_chat = UserChats.objects.create(user=user)
+        user_chat.save()
         
         uid = urlsafe_base64_encode(force_bytes(user.pk))
         token = default_token_generator.make_token(user)
@@ -137,3 +145,39 @@ class ResetPasswordSerializer(SignupSerializer):
         user.save()
         return user
     
+    
+class UserInfoSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = User
+        fields = ('id', 'first_name', 'last_name', 'email', 'phone', 'address')
+        
+
+class SendConfirmationCodeSerializer(serializers.Serializer):
+    email = serializers.EmailField(required=True)
+
+    class Meta:
+        fields = ['email']
+
+    def create(self, validated_data):
+        email = validated_data['email']
+        user = self.context['request'].user  
+
+        code = f"{random.randint(100000, 999999)}"
+
+        EmailConfirmation.objects.create(email=email, code=code, user=user)
+
+        send_mail(
+            'Your Confirmation Code',
+            f'Your confirmation code is {code}',
+            settings.EMAIL_HOST_USER,
+            [email],
+            fail_silently=False,
+        )
+
+        return {'email': email, 'message': 'Confirmation code sent successfully'}
+    
+    
+class ConfirmationCodeSerializer(serializers.Serializer):
+    code = serializers.CharField(required=True)
+    class Meta:
+        fields = ['code', 'email']
