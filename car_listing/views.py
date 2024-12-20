@@ -197,12 +197,8 @@ class ConfigData(APIView):
 from django.views.generic import TemplateView
 
 class Template(TemplateView):
-    template_name = 'form.html'
+    template_name = 'forms.html'
 
-    def get_context_data(self, **kwargs):
-        context = super().get_context_data(**kwargs)
-        context['config_data'] = cache.get('config_data')
-        return context
     
 class CarDetailView(DetailView):
     model = CarListing

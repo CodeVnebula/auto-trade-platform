@@ -1,3 +1,4 @@
+
 from django.db import models
 from django.core.validators import (
     MinValueValidator, 
@@ -7,6 +8,7 @@ from django.core.validators import (
 
 from auto_market.validators import validate_photo_size
 
+from .tasks import add_watermark, crop_and_resize_image
 
 
 class VehicleType(models.Model):
@@ -330,6 +332,13 @@ class CarPhoto(models.Model):
         validators=[validate_photo_size]
     )
     car = models.ForeignKey(CarListing, on_delete=models.CASCADE, related_name='photos')
+
+    def save(self, *args, **kwargs):
+        super().save(*args, **kwargs)
+        
+        add_watermark(self.photo.path)
+        crop_and_resize_image(self.photo.path)
+        
 
     def __str__(self):
         return f"Photo {self.id} for Car {self.car.id}"
