@@ -34,6 +34,22 @@ class SignupSerializer(serializers.ModelSerializer):
         )
 
     def validate(self, attrs):    
+        first_name = attrs.get('first_name')
+        last_name = attrs.get('last_name')
+        errors = {}
+        for char in first_name:
+            if not char.isalpha() or char == ' ':
+                errors['first_name'] = 'First name should contain only letters'
+                break
+        
+        for char in last_name:
+            if not char.isalpha() or char == ' ':
+                errors['last_name'] = 'Last name should contain only letters'
+                break
+            
+        if errors:
+            raise serializers.ValidationError(errors)
+        
         password = attrs.get('password')
         password_2 = attrs.get('password_2')
         if password != password_2:
@@ -56,6 +72,7 @@ class SignupSerializer(serializers.ModelSerializer):
             raise serializers.ValidationError(
                 'Password must contain an uppercase letter'
             )
+        
         return attrs
 
     def create(self, validated_data):
@@ -76,7 +93,7 @@ class SignupSerializer(serializers.ModelSerializer):
         token = default_token_generator.make_token(user)
         request = self.context.get('request')
         verification_link = request.build_absolute_uri(
-            reverse('auth:email_verify', kwargs={'uidb64': uid, 'token': token})
+            reverse('frontend:email_verify', kwargs={'uidb64': uid, 'token': token})
         )
 
         send_mail(
@@ -110,7 +127,7 @@ class ResetPasswordRequestSerializer(serializers.Serializer):
         token = default_token_generator.make_token(user)
         request = self.context.get('request')
         reset_password_link = request.build_absolute_uri(
-            reverse('auth:reset_password', kwargs={'uidb64': uid, 'token': token})
+            reverse('frontend:password_reset', kwargs={'uidb64': uid, 'token': token})
         )
 
         send_mail(
@@ -121,15 +138,46 @@ class ResetPasswordRequestSerializer(serializers.Serializer):
         )
     
     
-class ResetPasswordSerializer(SignupSerializer):
-    
+class ResetPasswordSerializer(serializers.ModelSerializer):
+    password = serializers.CharField(
+        write_only=True,
+        required=True,
+        style={'input_type': 'password'}
+    )
+    password_2 = serializers.CharField(
+        write_only=True,
+        required=True,
+        style={'input_type': 'password'}
+    )
+       
     class Meta:
         model = User
         fields = ('password', 'password_2')
         
     def validate(self, attrs):
-        attrs = super().validate(attrs)
         password = attrs.get('password')
+        password_2 = attrs.get('password_2')
+        if password != password_2:
+            raise serializers.ValidationError(
+                'Passwords do not match'
+            )
+        if password and len(password) < 8:
+            raise serializers.ValidationError(
+                'Password must be at least 8 characters long'
+            )
+        if password and not any(char.isdigit() for char in password):
+            raise serializers.ValidationError(
+                'Password must contain a digit'
+            )
+        if password and not any(char.isalpha() for char in password):
+            raise serializers.ValidationError(
+                'Password must contain a letter'
+            )
+        if password and not any(char.isupper() for char in password):
+            raise serializers.ValidationError(
+                'Password must contain an uppercase letter'
+            )
+            
         user = self.context.get('user')
         if user and user.check_password(password):
             raise serializers.ValidationError(

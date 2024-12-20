@@ -30,6 +30,7 @@ class SignupView(CreateAPIView):
 
     def create(self, request, *args, **kwargs):
         response = super().create(request, *args, **kwargs)
+        print(request.data)
         response.data = {
             'message': 'User created successfully. Check your email to activate your account.'
         }
@@ -90,6 +91,7 @@ class ResetPasswordView(APIView):
 
     def put(self, request, uidb64, token):
         instance = self.get_object(uidb64, token)
+        print(request.data, "asddfgdfgfghgfhfghfghfgfgh\n\n\n\n\n\n\n", instance)
         print(instance)
         if not instance:
             return Response(
@@ -116,10 +118,15 @@ class EmailVerifyView(APIView):
             user = get_object_or_404(User, pk=uid)
             
             if default_token_generator.check_token(user, token):
-                user.is_active = True
-                user.save()
+                if not user.is_active:
+                    user.is_active = True
+                    user.save()
+                    return Response(
+                        {'message': 'Email verified successfully'},
+                        status=status.HTTP_200_OK
+                    )
                 return Response(
-                    {'message': 'Email verified successfully'},
+                    {'message': 'Email already verified'},
                     status=status.HTTP_200_OK
                 )
             else:
