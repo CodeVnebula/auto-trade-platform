@@ -1,0 +1,216 @@
+{% extends 'base.html' %}
+
+<body>
+
+    {% block content %}
+    <main class="main">
+
+        <!-- user-profile -->
+        <div class="user-profile py-120">
+            <div class="container">
+                <div class="row">
+                    <div class="col-lg-3">
+                        <div class="user-profile-sidebar">
+                            <div class="user-profile-sidebar-top">
+                                <div class="user-profile-img">
+                                    <img src="assets/img/account/user.jpg" alt="">
+                                    <button type="button" class="profile-img-btn"><i class="far fa-camera"></i></button>
+                                    <input type="file" class="profile-img-file">
+                                </div>
+                                <h5>Antoni Jonson</h5>
+                                <p><a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="f796998398999eb7928f969a879b92d994989a">[email&#160;protected]</a></p>
+                            </div>
+                            <ul class="user-profile-sidebar-list">
+                                <li><a href="dashboard.html"><i class="far fa-gauge-high"></i> Dashboard</a></li>
+                                <li><a href="profile.html"><i class="far fa-user"></i> My Profile</a></li>
+                                <li><a class="active" href="profile-listing.html"><i class="far fa-layer-group"></i> My Listing</a></li>
+                                <li><a href="add-listing.html"><i class="far fa-plus-circle"></i> Add Listing</a></li>
+                                <li><a href="profile-favorite.html"><i class="far fa-heart"></i> My Favorites</a></li>
+                                <li><a href="profile-message.html"><i class="far fa-envelope"></i> Messages <span class="badge badge-danger">02</span></a></li>
+                                <li><a href="profile-setting.html"><i class="far fa-gear"></i> Settings</a></li>
+                                <li><a href="#"><i class="far fa-sign-out"></i> Logout</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="col-lg-9">
+                        <div class="user-profile-wrapper">
+                            <div class="user-profile-card profile-ad">
+                                <div class="user-profile-card-header">
+                                    <h4 class="user-profile-card-title">My Listing</h4>
+                                    <div class="user-profile-card-header-right">
+                                        <div class="user-profile-search">
+                                            <div class="form-group">
+                                                <input type="text" class="form-control" placeholder="Search...">
+                                                <i class="far fa-search"></i>
+                                            </div>
+                                        </div>
+                                        <a href="#" class="theme-btn"><span class="far fa-plus-circle"></span>Add Listing</a>
+                                    </div>
+                                </div>
+                                <div class="col-lg-12">
+                                    <div class="table-responsive">
+                                        <table class="table text-nowrap">
+                                            <thead>
+                                                <tr>
+                                                    <th>Car Info</th>
+                                                    <th>Brand</th>
+                                                    <th>Publish</th>
+                                                    <th>Price</th>
+                                                    <th>Views</th>
+                                                    <th>Status</th>
+                                                    <th>Action</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <tr>
+                                                    <td>
+                                                        <div class="table-list-info">
+                                                            <a href="#">
+                                                                <img src="assets/img/car/01.jpg" alt="">
+                                                                <div class="table-list-content">
+                                                                    <h6>Mercedes Benz Car</h6>
+                                                                    <span>Car ID: #123456</span>
+                                                                </div>
+                                                            </a>
+                                                        </div>
+                                                    </td>
+                                                    <td>Ferrari</td>
+                                                    <td>5 days ago</td>
+                                                    <td>$50,650</td>
+                                                    <td>350k+</td>
+                                                    <td><span class="badge badge-success">Active</span></td>
+                                                    <td>
+                                                        <a href="#" class="btn btn-outline-secondary btn-sm rounded-2" data-bs-toggle="tooltip" title="Details"><i class="far fa-eye"></i></a>
+                                                        <a href="#" class="btn btn-outline-secondary btn-sm rounded-2" data-bs-toggle="tooltip" title="Edit"><i class="far fa-pen"></i></a>
+                                                        <a href="#" class="btn btn-outline-danger btn-sm rounded-2" data-bs-toggle="tooltip" title="Delete"><i class="far fa-trash-can"></i></a>
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td>
+                                                        <div class="table-list-info">
+                                                            <a href="#">
+                                                                <img src="assets/img/car/02.jpg" alt="">
+                                                                <div class="table-list-content">
+                                                                    <h6>Mercedes Benz Car</h6>
+                                                                    <span>Car ID: #123456</span>
+                                                                </div>
+                                                            </a>
+                                                        </div>
+                                                    </td>
+                                                    <td>Ferrari</td>
+                                                    <td>5 days ago</td>
+                                                    <td>$50,650</td>
+                                                    <td>0</td>
+                                                    <td><span class="badge badge-info">Pending</span></td>
+                                                    <td>
+                                                        <a href="#" class="btn btn-outline-secondary btn-sm rounded-2" data-bs-toggle="tooltip" title="Details"><i class="far fa-eye"></i></a>
+                                                        <a href="#" class="btn btn-outline-secondary btn-sm rounded-2" data-bs-toggle="tooltip" title="Edit"><i class="far fa-pen"></i></a>
+                                                        <a href="#" class="btn btn-outline-danger btn-sm rounded-2" data-bs-toggle="tooltip" title="Delete"><i class="far fa-trash-can"></i></a>
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td>
+                                                        <div class="table-list-info">
+                                                            <a href="#">
+                                                                <img src="assets/img/car/03.jpg" alt="">
+                                                                <div class="table-list-content">
+                                                                    <h6>Mercedes Benz Car</h6>
+                                                                    <span>Car ID: #123456</span>
+                                                                </div>
+                                                            </a>
+                                                        </div>
+                                                    </td>
+                                                    <td>Ferrari</td>
+                                                    <td>5 days ago</td>
+                                                    <td>$50,650</td>
+                                                    <td>350k+</td>
+                                                    <td><span class="badge badge-primary">Sold</span></td>
+                                                    <td>
+                                                        <a href="#" class="btn btn-outline-secondary btn-sm rounded-2" data-bs-toggle="tooltip" title="Details"><i class="far fa-eye"></i></a>
+                                                        <a href="#" class="btn btn-outline-secondary btn-sm rounded-2" data-bs-toggle="tooltip" title="Edit"><i class="far fa-pen"></i></a>
+                                                        <a href="#" class="btn btn-outline-danger btn-sm rounded-2" data-bs-toggle="tooltip" title="Delete"><i class="far fa-trash-can"></i></a>
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td>
+                                                        <div class="table-list-info">
+                                                            <a href="#">
+                                                                <img src="assets/img/car/04.jpg" alt="">
+                                                                <div class="table-list-content">
+                                                                    <h6>Mercedes Benz Car</h6>
+                                                                    <span>Car ID: #123456</span>
+                                                                </div>
+                                                            </a>
+                                                        </div>
+                                                    </td>
+                                                    <td>Ferrari</td>
+                                                    <td>5 days ago</td>
+                                                    <td>$50,650</td>
+                                                    <td>0</td>
+                                                    <td><span class="badge badge-danger">Expired</span></td>
+                                                    <td>
+                                                        <a href="#" class="btn btn-outline-secondary btn-sm rounded-2" data-bs-toggle="tooltip" title="Details"><i class="far fa-eye"></i></a>
+                                                        <a href="#" class="btn btn-outline-secondary btn-sm rounded-2" data-bs-toggle="tooltip" title="Edit"><i class="far fa-pen"></i></a>
+                                                        <a href="#" class="btn btn-outline-danger btn-sm rounded-2" data-bs-toggle="tooltip" title="Delete"><i class="far fa-trash-can"></i></a>
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td>
+                                                        <div class="table-list-info">
+                                                            <a href="#">
+                                                                <img src="assets/img/car/05.jpg" alt="">
+                                                                <div class="table-list-content">
+                                                                    <h6>Mercedes Benz Car</h6>
+                                                                    <span>Car ID: #123456</span>
+                                                                </div>
+                                                            </a>
+                                                        </div>
+                                                    </td>
+                                                    <td>Ferrari</td>
+                                                    <td>5 days ago</td>
+                                                    <td>$50,650</td>
+                                                    <td>350k+</td>
+                                                    <td><span class="badge badge-success">Active</span></td>
+                                                    <td>
+                                                        <a href="#" class="btn btn-outline-secondary btn-sm rounded-2" data-bs-toggle="tooltip" title="Details"><i class="far fa-eye"></i></a>
+                                                        <a href="#" class="btn btn-outline-secondary btn-sm rounded-2" data-bs-toggle="tooltip" title="Edit"><i class="far fa-pen"></i></a>
+                                                        <a href="#" class="btn btn-outline-danger btn-sm rounded-2" data-bs-toggle="tooltip" title="Delete"><i class="far fa-trash-can"></i></a>
+                                                    </td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                    <!-- pagination -->
+                                    <div class="pagination-area">
+                                        <div aria-label="Page navigation example">
+                                            <ul class="pagination my-3">
+                                                <li class="page-item">
+                                                    <a class="page-link" href="#" aria-label="Previous">
+                                                        <span aria-hidden="true"><i class="far fa-angle-double-left"></i></span>
+                                                    </a>
+                                                </li>
+                                                <li class="page-item active"><a class="page-link" href="#">1</a></li>
+                                                <li class="page-item"><a class="page-link" href="#">2</a></li>
+                                                <li class="page-item"><a class="page-link" href="#">3</a></li>
+                                                <li class="page-item">
+                                                    <a class="page-link" href="#" aria-label="Next">
+                                                        <span aria-hidden="true"><i class="far fa-angle-double-right"></i></span>
+                                                    </a>
+                                                </li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- user-profile end -->
+
+    </main>
+    {% endblock content %}
+</body>
+
+</html>

@@ -1,0 +1,69 @@
+{% load static %}
+<div class="user-profile-sidebar">
+    <div class="user-profile-sidebar-top">
+        <div class="user-profile-img">
+            <img id="profile-picture" src="{% static 'img/account/user.png' %}" alt="">
+            <button type="button" class="profile-img-btn"><i class="far fa-camera"></i></button>
+            <input type="file" class="profile-img-file">
+        </div>
+        <h5 id="user-name">Antoni Jonson</h5>
+        <p id="user-email"><a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="3e5f504a5150577e5b465f534e525b105d5153">[email&#160;protected]</a></p>
+    </div>
+    <ul class="user-profile-sidebar-list">
+        <li><a href="dashboard.html"><i class="far fa-gauge-high"></i> Dashboard</a></li>
+        <li><a href="profile.html"><i class="far fa-user"></i> My Profile</a></li>
+        <li><a href="profile-listing.html"><i class="far fa-layer-group"></i> My Listing</a>
+        </li>
+        <li><a class="active" href="add-listing.html"><i class="far fa-plus-circle"></i> Add
+                Listing</a></li>
+        <li><a href="profile-favorite.html"><i class="far fa-heart"></i> My Favorites</a></li>
+        <li><a href="profile-message.html"><i class="far fa-envelope"></i> Messages <span
+                    class="badge badge-danger">02</span></a></li>
+        <li><a href="profile-setting.html"><i class="far fa-gear"></i> Settings</a></li>
+        <li><a href="#"><i class="far fa-sign-out"></i> Logout</a></li>
+    </ul>
+</div>
+
+<script>
+// Function to fetch user profile data
+function fetchUserProfile() {
+    fetch('http://127.0.0.1:8000/api/myprofile/info')  // Replace with your specific URL
+        .then(response => response.json())  // Parse the JSON response
+        .then(data => {
+            // Assuming there's only one element in the array
+            const userProfile = data[0];
+
+            // Extracting the values from the response and storing them in variables
+            const userId = userProfile.user.id;
+            const firstName = userProfile.user.first_name;
+            const lastName = userProfile.user.last_name;
+            const email = userProfile.user.email;
+            const phone = userProfile.user.phone;
+            const address = userProfile.user.address;
+
+            const profilePicture = userProfile.profile_picture || '{% static "img/account/user.png" %}'; // Fallback image URL
+            const enableMessages = userProfile.enable_messages;
+            const receiveMessages = userProfile.receive_messages;
+            const receiveEmails = userProfile.receive_emails;
+
+            const hidePhone = userProfile.hide_phone;
+            const hideEmail = userProfile.hide_email;
+            const isPublic = userProfile.is_public;
+
+            // Update the profile picture, name, and email in the DOM
+            document.getElementById('profile-picture').src = profilePicture;
+            document.getElementById('user-name').textContent = `${firstName} ${lastName}`;
+            document.getElementById('user-email').innerHTML = `<a href="mailto:${email}">${email}</a>`;
+
+            // Now, you can use these variables to populate the input fields or further processing
+            console.log(userId, firstName, lastName, email, phone, address, profilePicture, enableMessages, receiveMessages, receiveEmails, hidePhone, hideEmail, isPublic);
+        })
+        .catch(error => {
+            console.error('Error fetching user profile:', error);
+        });
+}
+
+// Call the function to fetch the user profile
+fetchUserProfile();
+
+</script>

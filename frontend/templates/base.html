@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <!-- meta tags -->
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="{% block description %}{% endblock description %}">
+    <meta name="keywords" content="{% block keywords %}{% endblock keywords %}">
+
+    <!-- title -->
+    <title>{% block title %}{% endblock title %}</title>
+
+    <!-- stylesheet -->
+    {% include 'imports/stylesheets.html' %}
+    {% block stylesheet %}{% endblock stylesheet %}
+    
+</head>
+
+<body>
+    <!-- preloader -->
+    {% include 'partials/preloader.html' %}
+
+    <!-- header area -->
+    {% include 'partials/header.html' %}
+
+    <!-- sidebar-popup -->
+    {% include 'partials/sidebar-popup.html' %}
+
+    {% block content %}
+
+    {% endblock content %}
+
+    <!-- footer area -->
+    {% include 'partials/footer.html' %}
+
+    <!-- scroll-top  -->
+    {% include 'partials/scroll-top.html' %}
+
+    <!-- scripts -->
+    {% include 'imports/scripts.html' %}
+    {% block scripts %}{% endblock scripts %}
+</body>
+
+</html>

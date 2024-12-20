@@ -1,0 +1,192 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title %} Car Listings {% endblock title %}
+
+{% block stylesheet %}
+    <link rel="stylesheet" href="{% static 'css/nice-select.min.css' %}">
+{% endblock stylesheet %}
+
+<body>
+    {% block content %}
+    <main class="main">
+
+        {% include 'components/breadcrumb.html' %}
+
+        {% include 'components/car-area.html' %}
+
+    </main>
+    {% endblock content %}
+
+    {% block scripts %}
+    <script>
+        async function fetchCarData() {
+            try {
+                const response = await fetch('http://127.0.0.1:8000/api/car-listings/list');
+                if (!response.ok) {
+                    throw new Error(`HTTP error! status: ${response.status}`);
+                }
+                const data = await response.json();
+                return data.results; // Return the car data
+            } catch (error) {
+                console.error('Error fetching data:', error);
+                return [];
+            }
+        }
+
+        function createCarListings(cars) {
+            const carListContainer = document.querySelector('.col-md-6.col-lg-12');
+            carListContainer.innerHTML = "";
+
+            cars.forEach((car) => {
+                const listingId = car.id;
+                const make = car.main_features.make.title;
+                const model = car.main_features.model.title;
+                const year = car.main_features.year;
+                const price = car.price.price;
+                const engine = parseFloat(car.main_features.engine_volume).toFixed(2).replace(/\.00$/, '.0').replace(/(\.0)$/, '$1').replace(/(\.\d)0$/, '$1');
+                
+                const transmission = car.main_features.transmission.title;
+                const steeringWheel = car.main_features.steering_wheel.title;
+                const fuelType = car.main_features.fuel_type.title;
+                const mileage = car.main_features.mileage;
+                const mileageUnit = car.main_features.mileage_units.abbreviation;
+                const location = car.location.title;
+                const isCleared = car.is_cleared;
+                const priceNegotiable = car.price.price_negotiable;
+                const createdAt = timeAgo(car.created_at);
+                const views = car.views;
+                const imageUrl = car.first_photo.photo; 
+
+                const carHTML = `
+                    <div class="car-item">
+                        <div class="car-img">
+                            {% comment %} <span class="car-status status-1">Used</span> {% endcomment %}
+                            <img src="${imageUrl}" alt="${make} ${model}">
+                            <div class="car-btns">
+                                <a href="javascript:addToFavorites(${listingId})" id="favorite-${listingId}"><i class="far fa-heart"></i></a>
+                                <a href="javascript:void(0);" id="compare-${listingId}"><i class="far fa-arrows-repeat"></i></a>
+                            </div>
+                        </div>
+                        <div class="car-content">
+                            <div class="car-top">
+                                <h4 id="${listingId}">
+                                    <a href="">
+                                        ${make.charAt(0).toUpperCase() + make.slice(1).toLowerCase()} 
+                                        ${model.charAt(0).toUpperCase() + model.slice(1).toLowerCase()} 
+                                        ${year}
+                                    </a>
+                                </h4>
+                                <div class="car-rate">
+                                    <span><i class="far fa-eye"></i> ${views} ნახვა &#8226;</span>  
+                                    <span><i class="far fa-clock"></i> ${createdAt}</span>
+                                </div>
+                            </div>
+                            <ul class="car-list">
+                                <li><i class="far fa-steering-wheel"></i>${steeringWheel}</li>
+                                <li><i class="far fa-road"></i>${mileage} ${mileageUnit}</li>
+                                <li><i class="far fa-cogs"></i>${transmission}</li>
+                                <li><i class="far fa-engine"></i>${engine} ${fuelType}</li>
+                            </ul>
+                            <div class="car-footer">
+                                <span class="car-price" style="${priceNegotiable ? 'font-size: 0.9em;' : ''}">
+                                    ${priceNegotiable ? 'ფასი შეთანხმებით' : `${price.currency === 'USD' ? '₾' : '$'}${price}`}
+                                </span>
+                                <span><i class="far fa-map-marker-alt"></i> ${location} </span>
+                                
+                                <span style="color: ${isCleared ? 'green' : 'red'};">
+                                    ${isCleared ? '<i class="far fa-check-circle" style="color: green;"></i>' : ''}
+                                    ${isCleared ? 'განბაჟებული' : 'განუბაჟებელი'}
+                                </span>
+                                <a href="" class="theme-btn"><span class="far fa-eye"></span>დეტალები</a>
+                            </div>
+                        </div>
+                    </div>
+                `;
+                carListContainer.innerHTML += carHTML;
+            });
+        }
+
+        document.addEventListener('DOMContentLoaded', async () => {
+            const cars = await fetchCarData();
+            createCarListings(cars);
+        });
+
+        function timeAgo(dateString) {
+            const date = new Date(dateString).toLocaleString()
+            const now = new Date();
+            const createdTime = new Date(date);
+            const diffInSeconds = Math.floor((now - createdTime) / 1000);
+        
+            if (diffInSeconds < 60) {
+                return `${diffInSeconds} წამის წინ`;
+            } else if (diffInSeconds < 3600) {
+                const minutes = Math.floor(diffInSeconds / 60);
+                return `${minutes} წუთის წინ`;
+            } else if (diffInSeconds < 86400) {
+                const hours = Math.floor(diffInSeconds / 3600);
+                return `${hours} საათის წინ`;
+            } else if (diffInSeconds < 2592000) {
+                const days = Math.floor(diffInSeconds / 86400);
+                return `${days} დღის წინ`;
+            } else if (diffInSeconds < 31536000) {
+                const months = Math.floor(diffInSeconds / 2592000);
+                return `${months} თვის წინ`;
+            } else {
+            const years = Math.floor(diffInSeconds / 31536000);
+                return `${years} წლის წინ`;
+            }
+        }
+
+
+        async function addToFavorites(listingId) {
+            const url = `http://127.0.0.1:8000/api/myprofile/favorites/add/${listingId}/`;
+        
+            let accessToken = localStorage.getItem('access_token');
+        
+            if (!accessToken) {
+                console.log('Access token is missing or expired, refreshing...');
+                accessToken = await getAccessToken();
+                if (!accessToken) {
+                    return; 
+                }
+            }
+        
+            try {
+                const response = await fetch(url, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'Authorization': `Bearer ${accessToken}`
+                    }
+                });
+        
+                if (response.ok) {
+                    const data = await response.json();
+                    console.log('Listing added to favorites:', data);
+                    alert('Listing successfully added to your favorites!');
+                } else if (response.status === 401) {
+                    console.log('Access token expired or invalid, refreshing...');
+                    accessToken = await getAccessToken();
+                    if (accessToken) {
+                        return addToFavorites(listingId);
+                    } else {
+                        alert('Your session has expired. Please log in again.');
+                        window.location.href = '/login';
+                    }
+                } else {
+                    const errorData = await response.json();
+                    console.error('Error adding to favorites:', errorData);
+                    alert('Failed to add listing to favorites. Please try again later.');
+                }
+            } catch (error) {
+                console.error('Network error:', error);
+                alert('An error occurred while trying to add the listing to your favorites.');
+            }
+        }
+        
+    </script>
+    {% endblock scripts %}
+
+</body>
+
+</html>

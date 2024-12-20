@@ -1,0 +1,19 @@
+.input-container {
+    position: relative;
+    width: 100%;
+}
+
+.form-control {
+    width: 100%;
+    padding-right: 40px; /* Add extra space on the right for the icon */
+}
+
+.toggle-password {
+    position: absolute;
+    right: 10px; /* Position it inside the input */
+    top: 50%;
+    transform: translateY(-50%);
+    font-size: 18px;
+    cursor: pointer;
+    color: #888; /* Adjust color if needed */
+}
