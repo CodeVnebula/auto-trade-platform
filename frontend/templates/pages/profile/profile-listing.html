@@ -1,4 +1,7 @@
 {% extends 'base.html' %}
+{% load static %}
+{% block title %}My Listings{% endblock %}
+
 
 <body>
 
@@ -10,27 +13,7 @@
             <div class="container">
                 <div class="row">
                     <div class="col-lg-3">
-                        <div class="user-profile-sidebar">
-                            <div class="user-profile-sidebar-top">
-                                <div class="user-profile-img">
-                                    <img src="assets/img/account/user.jpg" alt="">
-                                    <button type="button" class="profile-img-btn"><i class="far fa-camera"></i></button>
-                                    <input type="file" class="profile-img-file">
-                                </div>
-                                <h5>Antoni Jonson</h5>
-                                <p><a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="f796998398999eb7928f969a879b92d994989a">[email&#160;protected]</a></p>
-                            </div>
-                            <ul class="user-profile-sidebar-list">
-                                <li><a href="dashboard.html"><i class="far fa-gauge-high"></i> Dashboard</a></li>
-                                <li><a href="profile.html"><i class="far fa-user"></i> My Profile</a></li>
-                                <li><a class="active" href="profile-listing.html"><i class="far fa-layer-group"></i> My Listing</a></li>
-                                <li><a href="add-listing.html"><i class="far fa-plus-circle"></i> Add Listing</a></li>
-                                <li><a href="profile-favorite.html"><i class="far fa-heart"></i> My Favorites</a></li>
-                                <li><a href="profile-message.html"><i class="far fa-envelope"></i> Messages <span class="badge badge-danger">02</span></a></li>
-                                <li><a href="profile-setting.html"><i class="far fa-gear"></i> Settings</a></li>
-                                <li><a href="#"><i class="far fa-sign-out"></i> Logout</a></li>
-                            </ul>
-                        </div>
+                        {% include 'components/user-profile-area.html' %}
                     </div>
                     <div class="col-lg-9">
                         <div class="user-profile-wrapper">
@@ -62,121 +45,7 @@
                                                 </tr>
                                             </thead>
                                             <tbody>
-                                                <tr>
-                                                    <td>
-                                                        <div class="table-list-info">
-                                                            <a href="#">
-                                                                <img src="assets/img/car/01.jpg" alt="">
-                                                                <div class="table-list-content">
-                                                                    <h6>Mercedes Benz Car</h6>
-                                                                    <span>Car ID: #123456</span>
-                                                                </div>
-                                                            </a>
-                                                        </div>
-                                                    </td>
-                                                    <td>Ferrari</td>
-                                                    <td>5 days ago</td>
-                                                    <td>$50,650</td>
-                                                    <td>350k+</td>
-                                                    <td><span class="badge badge-success">Active</span></td>
-                                                    <td>
-                                                        <a href="#" class="btn btn-outline-secondary btn-sm rounded-2" data-bs-toggle="tooltip" title="Details"><i class="far fa-eye"></i></a>
-                                                        <a href="#" class="btn btn-outline-secondary btn-sm rounded-2" data-bs-toggle="tooltip" title="Edit"><i class="far fa-pen"></i></a>
-                                                        <a href="#" class="btn btn-outline-danger btn-sm rounded-2" data-bs-toggle="tooltip" title="Delete"><i class="far fa-trash-can"></i></a>
-                                                    </td>
-                                                </tr>
-                                                <tr>
-                                                    <td>
-                                                        <div class="table-list-info">
-                                                            <a href="#">
-                                                                <img src="assets/img/car/02.jpg" alt="">
-                                                                <div class="table-list-content">
-                                                                    <h6>Mercedes Benz Car</h6>
-                                                                    <span>Car ID: #123456</span>
-                                                                </div>
-                                                            </a>
-                                                        </div>
-                                                    </td>
-                                                    <td>Ferrari</td>
-                                                    <td>5 days ago</td>
-                                                    <td>$50,650</td>
-                                                    <td>0</td>
-                                                    <td><span class="badge badge-info">Pending</span></td>
-                                                    <td>
-                                                        <a href="#" class="btn btn-outline-secondary btn-sm rounded-2" data-bs-toggle="tooltip" title="Details"><i class="far fa-eye"></i></a>
-                                                        <a href="#" class="btn btn-outline-secondary btn-sm rounded-2" data-bs-toggle="tooltip" title="Edit"><i class="far fa-pen"></i></a>
-                                                        <a href="#" class="btn btn-outline-danger btn-sm rounded-2" data-bs-toggle="tooltip" title="Delete"><i class="far fa-trash-can"></i></a>
-                                                    </td>
-                                                </tr>
-                                                <tr>
-                                                    <td>
-                                                        <div class="table-list-info">
-                                                            <a href="#">
-                                                                <img src="assets/img/car/03.jpg" alt="">
-                                                                <div class="table-list-content">
-                                                                    <h6>Mercedes Benz Car</h6>
-                                                                    <span>Car ID: #123456</span>
-                                                                </div>
-                                                            </a>
-                                                        </div>
-                                                    </td>
-                                                    <td>Ferrari</td>
-                                                    <td>5 days ago</td>
-                                                    <td>$50,650</td>
-                                                    <td>350k+</td>
-                                                    <td><span class="badge badge-primary">Sold</span></td>
-                                                    <td>
-                                                        <a href="#" class="btn btn-outline-secondary btn-sm rounded-2" data-bs-toggle="tooltip" title="Details"><i class="far fa-eye"></i></a>
-                                                        <a href="#" class="btn btn-outline-secondary btn-sm rounded-2" data-bs-toggle="tooltip" title="Edit"><i class="far fa-pen"></i></a>
-                                                        <a href="#" class="btn btn-outline-danger btn-sm rounded-2" data-bs-toggle="tooltip" title="Delete"><i class="far fa-trash-can"></i></a>
-                                                    </td>
-                                                </tr>
-                                                <tr>
-                                                    <td>
-                                                        <div class="table-list-info">
-                                                            <a href="#">
-                                                                <img src="assets/img/car/04.jpg" alt="">
-                                                                <div class="table-list-content">
-                                                                    <h6>Mercedes Benz Car</h6>
-                                                                    <span>Car ID: #123456</span>
-                                                                </div>
-                                                            </a>
-                                                        </div>
-                                                    </td>
-                                                    <td>Ferrari</td>
-                                                    <td>5 days ago</td>
-                                                    <td>$50,650</td>
-                                                    <td>0</td>
-                                                    <td><span class="badge badge-danger">Expired</span></td>
-                                                    <td>
-                                                        <a href="#" class="btn btn-outline-secondary btn-sm rounded-2" data-bs-toggle="tooltip" title="Details"><i class="far fa-eye"></i></a>
-                                                        <a href="#" class="btn btn-outline-secondary btn-sm rounded-2" data-bs-toggle="tooltip" title="Edit"><i class="far fa-pen"></i></a>
-                                                        <a href="#" class="btn btn-outline-danger btn-sm rounded-2" data-bs-toggle="tooltip" title="Delete"><i class="far fa-trash-can"></i></a>
-                                                    </td>
-                                                </tr>
-                                                <tr>
-                                                    <td>
-                                                        <div class="table-list-info">
-                                                            <a href="#">
-                                                                <img src="assets/img/car/05.jpg" alt="">
-                                                                <div class="table-list-content">
-                                                                    <h6>Mercedes Benz Car</h6>
-                                                                    <span>Car ID: #123456</span>
-                                                                </div>
-                                                            </a>
-                                                        </div>
-                                                    </td>
-                                                    <td>Ferrari</td>
-                                                    <td>5 days ago</td>
-                                                    <td>$50,650</td>
-                                                    <td>350k+</td>
-                                                    <td><span class="badge badge-success">Active</span></td>
-                                                    <td>
-                                                        <a href="#" class="btn btn-outline-secondary btn-sm rounded-2" data-bs-toggle="tooltip" title="Details"><i class="far fa-eye"></i></a>
-                                                        <a href="#" class="btn btn-outline-secondary btn-sm rounded-2" data-bs-toggle="tooltip" title="Edit"><i class="far fa-pen"></i></a>
-                                                        <a href="#" class="btn btn-outline-danger btn-sm rounded-2" data-bs-toggle="tooltip" title="Delete"><i class="far fa-trash-can"></i></a>
-                                                    </td>
-                                                </tr>
+                                                
                                             </tbody>
                                         </table>
                                     </div>
@@ -211,6 +80,121 @@
 
     </main>
     {% endblock content %}
+
+    {% block scripts %}
+    <script type="module">
+        import { getProfile, handleProfileImageChange, updateProfileInfo, logout } from '{% static "js/profiles.js" %}';
+        var loginUrl = "{% url 'frontend:login' %}";
+        
+        document.addEventListener('DOMContentLoaded', function() {
+            var logoutBtn = document.getElementById('profile-logout');
+        
+            logoutBtn.addEventListener('click', function() {
+                (async () => {
+                    const response = await logout(loginUrl);
+                })();
+            });
+        });
+        
+        document.addEventListener('DOMContentLoaded', function() {
+            document.getElementById('profile-listings-link').classList.add('active');
+            
+            console.log("DOMContentLoaded event fired");
+            (async () => {
+                const data = await getProfile(loginUrl);
+                console.log("data: ", data);
+
+                if (data.profile_picture) {
+                    document.getElementById('profile-picture').src = data.profile_picture;
+                } else {
+                    document.getElementById('profile-picture').src = "{% static 'img/account/user.png' %}";
+                }
+                document.getElementById('full-name').innerText = data.user.first_name + " " + data.user.last_name;
+                document.getElementById('email1').innerText = data.user.email;
+                document.getElementById('chats-count').innerText = data.chats_count;
+
+            })();
+        });
+
+        document.querySelector('.profile-img-file').addEventListener('change', function() {
+            (async () => {
+                const response = await handleProfileImageChange(loginUrl, this.files[0]);
+                const data = await response.json();
+                document.getElementById('profile-picture').src = data.profile_picture;
+                console.log("Profile picture updated successfully:", data);
+                
+            })();
+        });
+
+        document.addEventListener('DOMContentLoaded', function() {
+        
+            // Get the access token from localStorage
+            const accessToken = localStorage.getItem('access_token');
+            
+            // URL for the GET request (you can change it later)
+            const url = 'http://127.0.0.1:8000/api/myprofile/mylistings'; // Replace with your actual URL
+            
+            // Fetch data from the URL with the access token
+            fetch(url, {
+                method: 'GET',
+                headers: {
+                    'Authorization': `Bearer ${accessToken}`,
+                    'Content-Type': 'application/json'
+                }
+            })
+            .then(response => response.json()) // Convert the response to JSON
+            .then(data => {
+                console.log('Data:', data);
+                // Assuming 'data' is the structure you provided above
+                
+                // Loop through the results and populate the HTML
+                data.results.forEach((car, index) => {
+                    // Get necessary data from the response
+                    const carInfo = car.main_features;
+                    const price = car.price.price;
+                    const priceCurrency = car.price.currency;
+                    const status = car.is_active ? 'Active' : 'Inactive';
+                    const brand = car.main_features.make.title;
+                    const views = car.views;
+        
+                    const row = document.querySelector(`.table tbody`).insertRow(index);
+        
+                    row.innerHTML = `
+                        <td>
+                            <div class="table-list-info">
+                                <a href="#">
+                                
+                                    <img src="${car.first_photo.photo}" alt="">
+                                    <div class="table-list-content">
+                                        <h6>${carInfo.make.title} ${carInfo.model.title}</h6>
+                                        <span>Car ID: #${car.id}</span>
+                                    </div>
+                                </a>
+                            </div>
+                        </td>
+                        <td>${brand}</td>
+                        <td>${car.created_at}</td>
+                        <td>${price} ${priceCurrency}</td>
+                        <td>${views}</td>
+                        <td><span class="badge badge-${car.is_active ? 'success' : 'danger'}">${status}</span></td>
+                        <td>
+                            <a href="#" class="btn btn-outline-secondary btn-sm rounded-2" data-bs-toggle="tooltip" title="Details"><i class="far fa-eye"></i></a>
+                            <a href="#" class="btn btn-outline-secondary btn-sm rounded-2" data-bs-toggle="tooltip" title="Edit"><i class="far fa-pen"></i></a>
+                            <a href="#" class="btn btn-outline-danger btn-sm rounded-2" data-bs-toggle="tooltip" title="Delete"><i class="far fa-trash-can"></i></a>
+                        </td>
+                    `;
+                });
+            })
+            .catch(error => {
+                console.error('Error fetching data:', error);
+            });
+        
+    });
+        
+    </script>
+
+    {% endblock scripts %}
+
 </body>
 
 </html>

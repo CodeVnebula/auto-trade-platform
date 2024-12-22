@@ -1,3 +1,4 @@
+{% load static %}
 <!-- top header -->
 <div class="header-top">
     <div class="container">
@@ -9,17 +10,18 @@
                                 <span class="__cf_email__" data-cfemail="2f464149406f4a574e425f434a014c4042">[email&#160;protected]</span></a></li>
                         <li><a href="tel:+21236547898"><i class="far fa-phone-volume"></i> +2 123 654 7898</a>
                         </li>
-                        <li><a href="#"><i class="far fa-alarm-clock"></i> Sun - Fri (08AM - 10PM)</a></li>
+                        <li><a href="#"><i class="far fa-alarm-clock"></i> შაბ - კვ (08AM - 10PM)</a></li>
                     </ul>
                 </div>
             </div>
             <div class="header-top-right">
                 <div class="header-top-link">
-                    <a href="#"><i class="far fa-arrow-right-to-arc"></i> Login</a>
-                    <a href="#"><i class="far fa-user-vneck"></i> Register</a>
+                        <a id="login-button" href="{% url 'frontend:login' %}"><i class="far fa-arrow-right-to-arc"></i> შესვლა</a>
+                        <a id="register-button" href="{% url 'frontend:register' %}"><i class="far fa-user-vneck"></i> რეგისტრაცია</a>
+                </div>
                 </div>
                 <div class="header-top-social">
-                    <span>Follow Us: </span>
+                    <span>გამოგვყევი: </span>
                     <a href="#"><i class="fab fa-facebook"></i></a>
                     <a href="#"><i class="fab fa-twitter"></i></a>
                     <a href="#"><i class="fab fa-instagram"></i></a>
@@ -29,3 +31,43 @@
         </div>
     </div>
 </div>
+
+<script type="module">
+    import { getNewAccessToken } from '{% static "js/tokens.js" %}';
+
+    document.addEventListener('DOMContentLoaded', () => {
+        const loginButton = document.getElementById('login-button');
+        const registerButton = document.getElementById('register-button');
+
+        const handleButtonClick = () => {
+            const dashboardURL = "{% url 'frontend:dashboard' %}";
+
+            const BASE_URL = 'http://127.0.0.1:8000/api/';
+            const accessToken = localStorage.getItem('access_token');
+
+            if (accessToken) {
+                fetch(`${BASE_URL}auth/token/verify/`, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify({ token: accessToken }),
+                })
+                .then(response => {
+                    if (response.ok) {
+                        console.log("User is authenticated. Redirecting to dashboard...");
+                        window.location.href = dashboardURL;
+                    } else {
+                        console.log("Access token expired or invalid. Please log in again.");
+                    }
+                })
+                .catch(error => {
+                    console.error('Error verifying token:', error);
+                });
+            }
+        };
+
+        loginButton.addEventListener('click', handleButtonClick);
+        registerButton.addEventListener('click', handleButtonClick);
+    });
+</script>

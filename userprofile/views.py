@@ -254,12 +254,10 @@ class ProfileSettingsViewSet(GenericViewSet):
         password = serializer.validated_data.get('password')
         
         user = request.user
-        if not check_password(password, user.password):
-            return Response(
-                {"message": "Password is incorrect."},
-                status=status.HTTP_400_BAD_REQUEST
+        if user and not user.check_password(password):
+            raise serializers.ValidationError(
+                'Password is incorrect.'
             )
-        
         user.delete()
         return Response(
             {"message": "Account deleted successfully."},

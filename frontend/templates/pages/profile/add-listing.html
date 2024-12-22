@@ -1,12 +1,15 @@
 {% extends 'base.html' %}
+{% load static %}
 
 {% block title %}Add listing{% endblock title %}
+
+{% block stylesheet %}
+    <link rel="stylesheet" href="{% static 'css/custom-css.css' %}">
+{% endblock %}
 
 <body>
 
     {% block content %}
-
-    
     <main class="main">
 
         {% include 'components/breadcrumb.html' %}
@@ -22,24 +25,25 @@
                     </div>
 
                     <div class="col-lg-9">
-                        <div class="user-profile-wrapper">
                             <div class="user-profile-card">
-                                <h4 class="user-profile-card-title">Add New Listing</h4>
                                 <div class="col-lg-12">
                                     <div class="add-listing-form">
-                                        <h6 class="mb-1">Basic Information</h6>
+                                        <h6 class="mb-1">ძირითადი მახასიათებლები</h6>
                                         <form action="#">
                                             <div class="row align-items-center">
-                                                <div class="col-lg-12">
+                                                
+                                                <div id="manufacturer" class="col-lg-4">
                                                     <div class="form-group">
-                                                        <label>Listing Title</label>
-                                                        <input type="text" class="form-control"
-                                                            placeholder="Enter title">
+                                                        <label for="manufacturerSelect">მწარმოებელი</label>
+                                                        <select id="manufacturerSelect" class="select" style="display:none;">
+                                                            <option value="">Choose</option>
+                                                        </select>
                                                     </div>
                                                 </div>
+                                                
                                                 <div class="col-lg-4">
                                                     <div class="form-group">
-                                                        <label>Condition</label>
+                                                        <label>მოდელი</label>
                                                         <select class="select">
                                                             <option value="">Choose</option>
                                                             <option value="1">New</option>
@@ -49,7 +53,7 @@
                                                 </div>
                                                 <div class="col-lg-4">
                                                     <div class="form-group">
-                                                        <label>Body Type</label>
+                                                        <label>კატეგორია</label>
                                                         <select class="select">
                                                             <option value="">Choose</option>
                                                             <option value="1">Sedan</option>
@@ -61,7 +65,7 @@
                                                 </div>
                                                 <div class="col-lg-4">
                                                     <div class="form-group">
-                                                        <label>Make/Brand</label>
+                                                        <label>წელი</label>
                                                         <select class="select">
                                                             <option value="">Choose</option>
                                                             <option value="1">BMW</option>
@@ -74,7 +78,7 @@
                                                 </div>
                                                 <div class="col-lg-4">
                                                     <div class="form-group">
-                                                        <label>Model</label>
+                                                        <label>თვე</label>
                                                         <select class="select">
                                                             <option value="">Choose</option>
                                                             <option value="1">A3</option>
@@ -87,14 +91,7 @@
                                                 </div>
                                                 <div class="col-lg-4">
                                                     <div class="form-group">
-                                                        <label>Price (USD)</label>
-                                                        <input type="text" class="form-control"
-                                                            placeholder="Enter price">
-                                                    </div>
-                                                </div>
-                                                <div class="col-lg-4">
-                                                    <div class="form-group">
-                                                        <label>Year</label>
+                                                        <label>საწვავის ტიპი</label>
                                                         <select class="select">
                                                             <option value="">Choose</option>
                                                             <option value="1">2023</option>
@@ -107,7 +104,7 @@
                                                 </div>
                                                 <div class="col-lg-4">
                                                     <div class="form-group">
-                                                        <label>Drive Type</label>
+                                                        <label>ძრავის მოცულობა</label>
                                                         <select class="select">
                                                             <option value="">Choose</option>
                                                             <option value="1">Automatic</option>
@@ -118,7 +115,27 @@
                                                 </div>
                                                 <div class="col-lg-4">
                                                     <div class="form-group">
-                                                        <label>Transmission</label>
+                                                        <label>ძრავის მოცულობა</label>
+                                                        <select class="select">
+                                                            <option value="">Choose</option>
+                                                            <option value="1">Automatic</option>
+                                                            <option value="2">Semi Auto</option>
+                                                            <option value="3">Manual</option>
+                                                        </select>
+                                                    </div>
+                                                </div>
+                                                <div class="col-lg-4">
+                                                    <div class="form-group">
+                                                        <label>ტურბო</label>
+                                                        <div class="form-check form-switch">
+                                                            <input class="form-check-input" type="checkbox" id="turboSwitch">
+                                                            <label class="form-check-label" for="turboSwitch">ტურბო</label>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="col-lg-4">
+                                                    <div class="form-group">
+                                                        <label>ცილინდრების რაოდენობა</label>
                                                         <select class="select">
                                                             <option value="">Choose</option>
                                                             <option value="1">Automatic</option>
@@ -128,7 +145,14 @@
                                                 </div>
                                                 <div class="col-lg-4">
                                                     <div class="form-group">
-                                                        <label>Fuel Type</label>
+                                                        <label>გარბენი</label>
+                                                        <input type="text" class="form-control"
+                                                            placeholder="Enter mileage">
+                                                    </div>
+                                                </div>
+                                                <div class="col-lg-4">
+                                                    <div class="form-group">
+                                                        <label>კმ/მილი</label>
                                                         <select class="select">
                                                             <option value="">Choose</option>
                                                             <option value="1">Diesel</option>
@@ -138,64 +162,303 @@
                                                 </div>
                                                 <div class="col-lg-4">
                                                     <div class="form-group">
-                                                        <label>Mileage</label>
-                                                        <input type="text" class="form-control"
-                                                            placeholder="Enter mileage">
+                                                        <label>ავტომობილის VIN კოდი</label>
+                                                        <div class="d-flex">
+                                                            <input type="text" class="form-control me-2" placeholder="ჩაწერეთ VIN კოდი">
+                                                        </div>
                                                     </div>
                                                 </div>
-                                                <div class="col-lg-4">
-                                                    <div class="form-group">
-                                                        <label>Engine Size</label>
-                                                        <input type="text" class="form-control"
-                                                            placeholder="Enter engine size">
+                                                
+                                                
+                                                
+                                                <div class="row align-items-center">
+                                                    <h6 class="fw-bold my-4">საჭე</h6>
+                                                    <div class="col-6 col-md-4">
+                                                        <div class="form-check">
+                                                            <input class="form-check-input" name="feature"
+                                                                type="checkbox" value="" id="feature1">
+                                                            <label class="form-check-label" for="feature1">
+                                                                Multi-zone A/C
+                                                            </label>
+                                                        </div>
                                                     </div>
                                                 </div>
-                                                <div class="col-lg-4">
-                                                    <div class="form-group">
-                                                        <label>Cylenders</label>
-                                                        <select class="select">
-                                                            <option value="">Choose</option>
-                                                            <option value="1">4</option>
-                                                            <option value="2">6</option>
-                                                        </select>
+
+
+                                                <div class="row align-items-center">
+                                                    <h6 class="fw-bold my-4">ტრანსმისია</h6>
+                                                    <div class="col-6 col-md-4">
+                                                        <div class="form-check">
+                                                            <input class="form-check-input" name="feature"
+                                                                type="checkbox" value="" id="feature1">
+                                                            <label class="form-check-label" for="feature1">
+                                                                Multi-zone A/C
+                                                            </label>
+                                                        </div>
                                                     </div>
                                                 </div>
-                                                <div class="col-lg-4">
-                                                    <div class="form-group">
-                                                        <label>Color</label>
-                                                        <select class="select">
-                                                            <option value="">Choose</option>
-                                                            <option value="1">Red</option>
-                                                            <option value="2">White</option>
-                                                            <option value="3">Black</option>
-                                                        </select>
+
+                                                <div class="row align-items-center">
+                                                    <h6 class="fw-bold my-4">წამყვანი თვლები</h6>
+                                                    <div class="col-6 col-md-4">
+                                                        <div class="form-check">
+                                                            <input class="form-check-input" name="feature"
+                                                                type="checkbox" value="" id="feature1">
+                                                            <label class="form-check-label" for="feature1">
+                                                                Multi-zone A/C
+                                                            </label>
+                                                        </div>
                                                     </div>
                                                 </div>
-                                                <div class="col-lg-4">
-                                                    <div class="form-group">
-                                                        <label>Doors</label>
-                                                        <select class="select">
-                                                            <option value="">Choose</option>
-                                                            <option value="1">2</option>
-                                                            <option value="2">4</option>
-                                                            <option value="3">6</option>
-                                                        </select>
+
+                                                <div class="row align-items-center">
+                                                    <h6 class="fw-bold my-4">კარის რაოდენობა</h6>
+                                                    <div class="col-6 col-md-4">
+                                                        <div class="form-check">
+                                                            <input class="form-check-input" name="feature"
+                                                                type="checkbox" value="" id="feature1">
+                                                            <label class="form-check-label" for="feature1">
+                                                                Multi-zone A/C
+                                                            </label>
+                                                        </div>
                                                     </div>
                                                 </div>
-                                                <div class="col-lg-4">
-                                                    <div class="form-group">
-                                                        <label>VIN</label>
-                                                        <input type="text" class="form-control" placeholder="Enter VIN">
+
+                                                <div class="row align-items-center">
+                                                    <h6 class="fw-bold my-4">აირბეგი</h6>
+                                                    <div class="col-6 col-md-4">
+                                                        <div class="form-check">
+                                                            <input class="form-check-input" name="feature"
+                                                                type="checkbox" value="" id="feature1">
+                                                            <label class="form-check-label" for="feature1">
+                                                                Multi-zone A/C
+                                                            </label>
+                                                        </div>
                                                     </div>
                                                 </div>
+
+                                                <div class="row align-items-center">
+                                                    <h6 class="fw-bold my-4">ავტომობილის ფერი</h6>
+                                                    <div class="col-12 d-flex flex-wrap gap-3">
+                                                        <!-- Red -->
+                                                        <div class="form-check d-flex align-items-center">
+                                                            <input class="form-check-input me-2" name="color" type="checkbox" value="red" id="colorRed">
+                                                            <label class="form-check-label d-flex align-items-center" for="colorRed">
+                                                                <span class="rounded-circle me-2" style="background-color: #FF5733; width: 20px; height: 20px; display: inline-block;"></span>
+                                                                Red
+                                                            </label>
+                                                        </div>
+                                                        
+                                                    </div>
+                                                </div>
+
+                                                <div class="row align-items-center">
+                                                    <h6 class="fw-bold my-4">სალონის მასალა და ფერი</h6>
+
+                                                    <div class="col-6 col-md-4">
+                                                        <div class="form-check">
+                                                            <input class="form-check-input" name="feature"
+                                                                type="checkbox" value="" id="feature1">
+                                                            <label class="form-check-label" for="feature1">
+                                                                Multi-zone A/C
+                                                            </label>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-6 col-md-4">
+                                                        <div class="form-check">
+                                                            <input class="form-check-input" name="feature"
+                                                                type="checkbox" value="" id="feature1">
+                                                            <label class="form-check-label" for="feature1">
+                                                                Multi-zone A/C
+                                                            </label>
+                                                        </div>
+                                                    </div>
+
+                                                    <div class="col-12 d-flex flex-wrap gap-3">
+                                                        <!-- Red -->
+                                                        <div class="form-check d-flex align-items-center">
+                                                            <input class="form-check-input me-2" name="color" type="checkbox" value="red" id="colorRed">
+                                                            <label class="form-check-label d-flex align-items-center" for="colorRed">
+                                                                <span class="rounded-circle me-2" style="background-color: #FF5733; width: 20px; height: 20px; display: inline-block;"></span>
+                                                                Red
+                                                            </label>
+                                                        </div>
+                                                        
+                                                    </div>
+                                                </div>
+                                                
+                                            
+                                                <div class="row align-items-center">
+                                                    <h6 class="fw-bold my-4">დამატებითი პარამეტრები</h6>
+                                                    <div class="col-6 col-md-4">
+                                                        <div class="form-check">
+                                                            <input class="form-check-input" name="feature"
+                                                                type="checkbox" value="" id="feature1">
+                                                            <label class="form-check-label" for="feature1">
+                                                                Multi-zone A/C
+                                                            </label>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-6 col-md-4">
+                                                        <div class="form-check">
+                                                            <input class="form-check-input" name="feature"
+                                                                type="checkbox" value="" id="feature2">
+                                                            <label class="form-check-label" for="feature2">
+                                                                Adaptive Cruise Control
+                                                            </label>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-6 col-md-4">
+                                                        <div class="form-check">
+                                                            <input class="form-check-input" name="feature"
+                                                                type="checkbox" value="" id="feature3">
+                                                            <label class="form-check-label" for="feature3">
+                                                                Sunroof
+                                                            </label>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-6 col-md-4">
+                                                        <div class="form-check">
+                                                            <input class="form-check-input" name="feature"
+                                                                type="checkbox" value="" id="feature4">
+                                                            <label class="form-check-label" for="feature4">
+                                                                Heated front seats
+                                                            </label>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-6 col-md-4">
+                                                        <div class="form-check">
+                                                            <input class="form-check-input" name="feature"
+                                                                type="checkbox" value="" id="feature5">
+                                                            <label class="form-check-label" for="feature5">
+                                                                Cooled Seats
+                                                            </label>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-6 col-md-4">
+                                                        <div class="form-check">
+                                                            <input class="form-check-input" name="feature"
+                                                                type="checkbox" value="" id="feature6">
+                                                            <label class="form-check-label" for="feature6">
+                                                                Panoramic roof
+                                                            </label>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-6 col-md-4">
+                                                        <div class="form-check">
+                                                            <input class="form-check-input" name="feature"
+                                                                type="checkbox" value="" id="feature7">
+                                                            <label class="form-check-label" for="feature7">
+                                                                Navigation system
+                                                            </label>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-6 col-md-4">
+                                                        <div class="form-check">
+                                                            <input class="form-check-input" name="feature"
+                                                                type="checkbox" value="" id="feature8">
+                                                            <label class="form-check-label" for="feature8">
+                                                                Keyles Start
+                                                            </label>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-6 col-md-4">
+                                                        <div class="form-check">
+                                                            <input class="form-check-input" name="feature"
+                                                                type="checkbox" value="" id="feature9">
+                                                            <label class="form-check-label" for="feature9">
+                                                                Bluetooth
+                                                            </label>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-6 col-md-4">
+                                                        <div class="form-check">
+                                                            <input class="form-check-input" name="feature"
+                                                                type="checkbox" value="" id="feature10">
+                                                            <label class="form-check-label" for="feature10">
+                                                                Antilock brakes
+                                                            </label>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-6 col-md-4">
+                                                        <div class="form-check">
+                                                            <input class="form-check-input" name="feature"
+                                                                type="checkbox" value="" id="feature11">
+                                                            <label class="form-check-label" for="feature11">
+                                                                Android Auto
+                                                            </label>
+                                                        </div>
+                                                    </div>
+                                                    
+                                                    
+                                                <h6 class="fw-bold mt-4 mb-1">ავტომობილის აღწერა</h6>
                                                 <div class="col-lg-12">
                                                     <div class="form-group">
-                                                        <label>Tags or keyword</label>
-                                                        <input type="text" class="form-control"
-                                                            placeholder="Enter tags ex: car,red">
+                                                        <textarea class="form-control" placeholder="სიმბოლოების რაოდენობა 5000"
+                                                            cols="30" rows="5"></textarea>
                                                     </div>
                                                 </div>
-                                                <h6 class="fw-bold mt-4 mb-1">Upload Images</h6>
+                                            </div>
+                                        </form>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-lg-12">
+                            <div class="user-profile-card">
+                                <div class="col-lg-12">            
+                                    <div class="add-listing-form">
+                                        <h6 class="mb-1">მდებარეობა და განბაჟება</h6>
+                                        <form action="#">
+                                            <div class="row align-items-center">
+                                                <div class="col-lg-12">
+                                                    <div class="form-group">
+                                                        <div class="col-lg-8">
+                                                            <div class="form-group">
+                                                                <label>მდებარეობა</label>
+                                                                <select class="select">
+                                                                    <option value="">Choose</option>
+                                                                    <option value="1">Automatic</option>
+                                                                    <option value="2">Semi Auto</option>
+                                                                    <option value="3">Manual</option>
+                                                                </select>
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-lg-8">
+                                                            <div class="form-group">
+                                                                <br>/<br>
+                                                                <div class="form-check form-switch">
+                                                                    <input class="form-check-input" type="checkbox" id="customsClearanceSwitch">
+                                                                    <label class="form-check-label" for="customsClearanceSwitch">განბაჟება</label>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-lg-8">
+                                                            <div class="form-group">
+                                                                <label></label>
+                                                                <div class="form-check form-switch">
+                                                                    <input class="form-check-input" type="checkbox" id="technicalInspectionSwitch">
+                                                                    <label class="form-check-label" for="technicalInspectionSwitch">ტექ. დათვალიერება</label>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </form>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-lg-12">
+                            <div class="user-profile-card">
+                                <div class="col-lg-12">            
+                                    <div class="add-listing-form">
+                                        <h6 class="mb-1">ფოტო/ვიდეო</h6>
+                                        <form action="#">
+                                            <div class="row align-items-center">
                                                 <div class="col-lg-12">
                                                     <div class="form-group">
                                                         <div class="list-upload-wrapper">
@@ -205,179 +468,42 @@
                                                             </div>
                                                             <input type="file" class="list-img-file" multiple>
                                                         </div>
+                                                        <div id="uploaded-images" class="d-flex flex-wrap gap-3 mt-3">
+                                                            <!-- Uploaded images will be displayed here -->
+                                                        </div>
+
+                                                        <script>
+                                                            document.querySelector('.list-img-file').addEventListener('change', function(event) {
+                                                                const files = event.target.files;
+                                                                const uploadedImagesContainer = document.getElementById('uploaded-images');
+                                                                uploadedImagesContainer.innerHTML = ''; // Clear previous images
+
+                                                                Array.from(files).forEach(file => {
+                                                                    const reader = new FileReader();
+                                                                    reader.onload = function(e) {
+                                                                        const img = document.createElement('img');
+                                                                        img.src = e.target.result;
+                                                                        img.classList.add('uploaded-image');
+                                                                        img.style.width = '100px';
+                                                                        img.style.height = '100px';
+                                                                        img.style.objectFit = 'cover';
+                                                                        img.style.margin = '5px';
+                                                                        uploadedImagesContainer.appendChild(img);
+                                                                    };
+                                                                    reader.readAsDataURL(file);
+                                                                });
+                                                            });
+                                                        </script>
+
+                                                        <div class="col-lg-12">
+                                                            <div class="form-group">
+                                                                <label>ვიდეოს ლინკი</label>
+                                                                <div class="d-flex">
+                                                                    <input type="text" class="form-control me-2" placeholder="მაგ: https://www.youtube.com/watch?v=video_id">
+                                                                </div>
+                                                            </div>
+                                                        </div>
                                                     </div>
-                                                </div>
-                                                <h6 class="fw-bold mt-4 mb-1">Location</h6>
-                                                <div class="col-lg-6">
-                                                    <div class="form-group">
-                                                        <label>Address</label>
-                                                        <input type="text" class="form-control"
-                                                            placeholder="Enter address">
-                                                    </div>
-                                                </div>
-                                                <div class="col-lg-6">
-                                                    <div class="form-group">
-                                                        <label>City</label>
-                                                        <input type="text" class="form-control"
-                                                            placeholder="Enter city">
-                                                    </div>
-                                                </div>
-                                                <div class="col-lg-6">
-                                                    <div class="form-group">
-                                                        <label>State</label>
-                                                        <input type="text" class="form-control"
-                                                            placeholder="Enter state">
-                                                    </div>
-                                                </div>
-                                                <div class="col-lg-6">
-                                                    <div class="form-group">
-                                                        <label>Zip Code</label>
-                                                        <input type="text" class="form-control"
-                                                            placeholder="Enter zip code">
-                                                    </div>
-                                                </div>
-                                                <h6 class="fw-bold mt-4 mb-1">Detailed Information</h6>
-                                                <div class="col-lg-12">
-                                                    <div class="form-group">
-                                                        <label>Description</label>
-                                                        <textarea class="form-control" placeholder="Write description"
-                                                            cols="30" rows="5"></textarea>
-                                                    </div>
-                                                </div>
-                                                <h6 class="fw-bold my-4">Features</h6>
-                                                <div class="col-6 col-md-4">
-                                                    <div class="form-check">
-                                                        <input class="form-check-input" name="feature"
-                                                            type="checkbox" value="" id="feature1">
-                                                        <label class="form-check-label" for="feature1">
-                                                            Multi-zone A/C
-                                                        </label>
-                                                    </div>
-                                                </div>
-                                                <div class="col-6 col-md-4">
-                                                    <div class="form-check">
-                                                        <input class="form-check-input" name="feature"
-                                                            type="checkbox" value="" id="feature2">
-                                                        <label class="form-check-label" for="feature2">
-                                                            Adaptive Cruise Control
-                                                        </label>
-                                                    </div>
-                                                </div>
-                                                <div class="col-6 col-md-4">
-                                                    <div class="form-check">
-                                                        <input class="form-check-input" name="feature"
-                                                            type="checkbox" value="" id="feature3">
-                                                        <label class="form-check-label" for="feature3">
-                                                            Sunroof
-                                                        </label>
-                                                    </div>
-                                                </div>
-                                                <div class="col-6 col-md-4">
-                                                    <div class="form-check">
-                                                        <input class="form-check-input" name="feature"
-                                                            type="checkbox" value="" id="feature4">
-                                                        <label class="form-check-label" for="feature4">
-                                                            Heated front seats
-                                                        </label>
-                                                    </div>
-                                                </div>
-                                                <div class="col-6 col-md-4">
-                                                    <div class="form-check">
-                                                        <input class="form-check-input" name="feature"
-                                                            type="checkbox" value="" id="feature5">
-                                                        <label class="form-check-label" for="feature5">
-                                                            Cooled Seats
-                                                        </label>
-                                                    </div>
-                                                </div>
-                                                <div class="col-6 col-md-4">
-                                                    <div class="form-check">
-                                                        <input class="form-check-input" name="feature"
-                                                            type="checkbox" value="" id="feature6">
-                                                        <label class="form-check-label" for="feature6">
-                                                            Panoramic roof
-                                                        </label>
-                                                    </div>
-                                                </div>
-                                                <div class="col-6 col-md-4">
-                                                    <div class="form-check">
-                                                        <input class="form-check-input" name="feature"
-                                                            type="checkbox" value="" id="feature7">
-                                                        <label class="form-check-label" for="feature7">
-                                                            Navigation system
-                                                        </label>
-                                                    </div>
-                                                </div>
-                                                <div class="col-6 col-md-4">
-                                                    <div class="form-check">
-                                                        <input class="form-check-input" name="feature"
-                                                            type="checkbox" value="" id="feature8">
-                                                        <label class="form-check-label" for="feature8">
-                                                            Keyles Start
-                                                        </label>
-                                                    </div>
-                                                </div>
-                                                <div class="col-6 col-md-4">
-                                                    <div class="form-check">
-                                                        <input class="form-check-input" name="feature"
-                                                            type="checkbox" value="" id="feature9">
-                                                        <label class="form-check-label" for="feature9">
-                                                            Bluetooth
-                                                        </label>
-                                                    </div>
-                                                </div>
-                                                <div class="col-6 col-md-4">
-                                                    <div class="form-check">
-                                                        <input class="form-check-input" name="feature"
-                                                            type="checkbox" value="" id="feature10">
-                                                        <label class="form-check-label" for="feature10">
-                                                            Antilock brakes
-                                                        </label>
-                                                    </div>
-                                                </div>
-                                                <div class="col-6 col-md-4">
-                                                    <div class="form-check">
-                                                        <input class="form-check-input" name="feature"
-                                                            type="checkbox" value="" id="feature11">
-                                                        <label class="form-check-label" for="feature11">
-                                                            Android Auto
-                                                        </label>
-                                                    </div>
-                                                </div>
-                                                <h6 class="fw-bold mt-4 mb-1">Contact Information</h6>
-                                                <div class="col-lg-4">
-                                                    <div class="form-group">
-                                                        <label>Name</label>
-                                                        <input type="text" class="form-control"
-                                                            placeholder="Enter name">
-                                                    </div>
-                                                </div>
-                                                <div class="col-lg-4">
-                                                    <div class="form-group">
-                                                        <label>Email</label>
-                                                        <input type="text" class="form-control"
-                                                            placeholder="Enter email">
-                                                    </div>
-                                                </div>
-                                                <div class="col-lg-4">
-                                                    <div class="form-group">
-                                                        <label>Phone</label>
-                                                        <input type="text" class="form-control"
-                                                            placeholder="Enter phone">
-                                                    </div>
-                                                </div>
-                                                <div class="col-12 mt-4">
-                                                    <div class="form-check">
-                                                        <input class="form-check-input" name="agree" type="checkbox"
-                                                            value="" id="agree">
-                                                        <label class="form-check-label" for="agree">
-                                                            I Agree With Your Terms Of Services And Privacy Policy.
-                                                        </label>
-                                                    </div>
-                                                </div>
-                                                <div class="col-lg-12 my-4">
-                                                    <button type="submit" class="theme-btn"><span
-                                                            class="far fa-save"></span> Save & Publish Listing</button>
                                                 </div>
                                             </div>
                                         </form>
@@ -385,6 +511,147 @@
                                 </div>
                             </div>
                         </div>
+
+                        <div class="col-lg-12">
+                            <div class="user-profile-card">
+                                <div class="col-lg-12">            
+                                    <div class="add-listing-form">
+                                        <h6 class="mb-1">ფასი</h6>
+                                        <form action="#">
+                                            <div class="row align-items-center">
+                                                <div class="col-lg-12">
+                                                    <div class="form-group">
+                                                        <div class="col-lg-6">
+                                                            <div class="form-group">
+                                                                <label>ფასი</label>
+                                                                <div class="d-flex">
+                                                                    <input type="text" class="form-control me-2" placeholder="მაგ: https://www.youtube.com/watch?v=video_id">
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <hr>
+                                                        <div class="col-6 col-md-4">
+                                                            <div class="form-check">
+                                                                <input class="form-check-input" name="feature"
+                                                                    type="checkbox" value="" id="feature10">
+                                                                <label class="form-check-label" for="feature10">
+                                                                    Antilock brakes
+                                                                </label>
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-6 col-md-4">
+                                                            <div class="form-check">
+                                                                <input class="form-check-input" name="feature"
+                                                                    type="checkbox" value="" id="feature11">
+                                                                <label class="form-check-label" for="feature11">
+                                                                    Android Auto
+                                                                </label>
+                                                            </div>
+                                                        </div>
+                                                        <hr>
+                                                        <div class="col-lg-8">
+                                                            <div class="form-group">
+                                                                <div class="form-check form-switch">
+                                                                    <input class="form-check-input" type="checkbox" id="priceNegotiableCheck">
+                                                                    <label class="form-check-label" for="priceNegotiableCheck">ფასი შეთანხმებით</label>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <hr>
+                                                        <div class="col-lg-8">
+                                                            <div class="form-group">
+                                                                <label></label>
+                                                                <div class="form-check form-switch">
+                                                                    <input class="form-check-input" type="checkbox" id="exchangeForAnotherCheck">
+                                                                    <label class="form-check-label" for="exchangeForAnotherCheck">სხვა ავტომობილში გაცვლა</label>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </form>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-lg-12">
+                            <div class="user-profile-card">
+                                <div class="col-lg-12">            
+                                    <div class="add-listing-form">
+                                        <h6 class="mb-1">კონტაქტი</h6>
+                                        <form action="#">
+                                            <div class="row align-items-center">
+                                                <div class="col-lg-12">
+                                                    <div class="form-group">
+                                                        <div class="col-lg-8">
+                                                            <div class="form-group">
+                                                                <label>სრული სახელი</label>
+                                                                <div class="d-flex">
+                                                                    <input type="text" class="form-control me-2" placeholder="თქვენი სახელი და გვარი">
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-lg-8">
+                                                            <div class="form-group">
+                                                                <label>ელ.ფოსტა</label>
+                                                                <div class="d-flex">
+                                                                    <input type="text" class="form-control me-2" placeholder="ელ.ფოსტა">
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-lg-8">
+                                                            <div class="form-group">
+                                                                <label>ტელეფონი</label>
+                                                                <div class="d-flex">
+                                                                    <input type="text" class="form-control me-2" placeholder="ტელეფონი">
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <hr>
+                                                        <div class="col-lg-8">
+                                                            <div class="form-group">
+                                                                <label>დამადასტურებელი კოდი</label>
+                                                                <div class="d-flex">
+                                                                    <input type="text" class="form-control me-2" placeholder="კოდი">
+                                                                    <button type="button" class="theme-btn">Send Link</button>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <hr>
+        
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </form>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-lg-12">
+                            <div class="user-profile-card">
+                                <div class="col-lg-12">            
+                                    <div class="add-listing-form">
+                                        <form action="#">
+                                            <div class="row align-items-center">
+                                                <div class="col-lg-12">
+                                                    <div class="form-group">
+                                                        <div class="col-lg-12 my-4">
+                                                            <button type="submit" class="theme-btn"><span class="far fa-save"></span> გამოქვეყნება</button>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </form>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        
+                            
                     </div>
                 </div>
             </div>
@@ -393,6 +660,104 @@
 
     </main> 
     {% endblock content %}
+
+    
+    {% block scripts %}
+    <script type="module" src="{% static 'js/tokens.js' %}"></script>
+    
+    <script src="{% static 'js/auth.js' %}"></script>
+
+    <script type="module" defer>
+        import { getConfigData, logout } from '{% static "js/listings.js" %}';
+
+        window.addEventListener('DOMContentLoaded', function () {
+            (async () => {
+                try {
+                    // Fetch config data
+                    const configData = await getConfigData();
+                    const carMakes = configData.car_makes;
+
+                    // Get the select element
+                    const selectElement = document.getElementById("manufacturerSelect");
+                    console.log("Select Element:", selectElement);
+
+                    if (!selectElement) {
+                        console.error("Select element not found!");
+                        return;
+                    }
+
+                    // Clear existing options (to avoid duplicates)
+                    selectElement.innerHTML = '<option value="" class="select">Choose</option>';
+
+                    // Add options to the select element
+                    if (carMakes.length > 0) {
+                        carMakes.forEach((make) => {
+                            const option = document.createElement('option');
+                            option.value = make.id;
+                            option.textContent = make.title;
+                            option.classList.add('select');
+                            selectElement.appendChild(option);
+                        });
+                    
+
+                        // Make the select visible if it was hidden
+                        selectElement.style.display = 'block';
+                    } else {
+                        console.error("No car makes available to display.");
+                    }
+
+                    console.log("Options added successfully!");
+                } catch (error) {
+                    console.error("Error fetching or processing data:", error);
+                }
+            })();
+        });
+        
+    </script> 
+
+    <script type="module">
+        import { getProfile, handleProfileImageChange } from '{% static "js/profiles.js" %}';
+
+        var loginUrl = "{% url 'frontend:login' %}";
+        document.addEventListener('DOMContentLoaded', function() {
+            document.getElementById('add-listing-link').classList.add('active');
+            
+            console.log("DOMContentLoaded event fired");
+            (async () => {
+                const data = await getProfile(loginUrl);
+                console.log("data: ", data);
+
+                if (data.profile_picture) {
+                    document.getElementById('profile-picture').src = data.profile_picture;
+                } else {
+                    document.getElementById('profile-picture').src = "{% static 'img/account/user.png' %}";
+                }
+                document.getElementById('full-name').innerText = data.user.first_name + " " + data.user.last_name;
+                document.getElementById('email1').innerText = data.user.email;
+                document.getElementById('chats-count').innerText = data.chats_count;
+
+                document.getElementById('first-name').value = data.user.first_name;
+                document.getElementById('last-name').value = data.user.last_name;
+                document.getElementById('email').value = data.user.email;
+                if (data.user.phone) 
+                    document.getElementById('phone').value = data.user.phone;
+                if (data.user.address) 
+                    document.getElementById('address').value = data.user.address;
+                
+            })();
+        });
+
+        document.querySelector('.profile-img-file').addEventListener('change', function() {
+            (async () => {
+                const response = await handleProfileImageChange(loginUrl, this.files[0]);
+                const data = await response.json();
+                document.getElementById('profile-picture').src = data.profile_picture;
+                console.log("Profile picture updated successfully:", data);
+                
+            })();
+        });
+    </script>
+    {% endblock scripts %}
 
 </body>
 

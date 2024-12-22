@@ -73,8 +73,11 @@
 
 
     {% block scripts %}
+    
+    
     <script src="{% static 'js/auth.js' %}"></script>
     
+
     <script>
         var dashboardUrl = "{% url 'frontend:dashboard' %}";
         function togglePasswordVisibility(inputId) {

@@ -6,6 +6,7 @@ from car_listing.models import  CarListing
 from authentication.models import EmailConfirmation
 from car_listing.serializers import CarListingListSerializer, ConfirmationCodeSerializer
 from authentication.models import Profile, User
+from messaging.models import UserChats
 
 from authentication.serializers import UserInfoSerializer
 
@@ -20,13 +21,16 @@ class CompareListingsSerializer(serializers.ModelSerializer):
         
 class ProfileInfoSerializer(serializers.ModelSerializer):
     user = UserInfoSerializer(read_only=True)
-    
+    chats_count = serializers.SerializerMethodField()
+
+    def get_chats_count(self, obj):
+        return obj.user.userchats.chats.count()
     class Meta:
         model = Profile
         fields = [
             'id', 'user', 'profile_picture', 'enable_messages', 
             'receive_messages', 'receive_emails', 'hide_phone', 
-            'hide_email', 'is_public'
+            'hide_email', 'is_public', 'chats_count'
         ]
         read_only_fields = ['user']
         
@@ -158,6 +162,11 @@ class UploadUserProfilePictureSerializer(serializers.ModelSerializer):
         return value
     
     def update(self, instance, validated_data):
+        if 'profile_picture' not in validated_data:
+            raise serializers.ValidationError(
+                "profile_picture field is required. Don't send me that keyword"
+            )
+        
         if instance.profile_picture:
             instance.profile_picture.delete()
         instance.profile_picture = validated_data.get(

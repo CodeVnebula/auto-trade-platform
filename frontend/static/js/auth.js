@@ -1,4 +1,4 @@
-BASE_URL = 'http://127.0.0.1:8000/api/';
+const BASE_URL = 'http://localhost:8000/api/'
 
 async function signup() {
     console.log("Signup function called");
@@ -122,11 +122,11 @@ async function login(dashboardUrl) {
     console.log("Login function called");
     const email = document.getElementById('email').value;
     const password = document.getElementById('password').value;
-    const remember = document.getElementById('remember').checked;
 
     const url = `${BASE_URL}auth/login/`;
 
     try {
+        console.log("pre-request sent to login")
         const response = await fetch(url, {
             method: 'POST',
             headers: {
@@ -137,17 +137,18 @@ async function login(dashboardUrl) {
                 password
             })
         });
+        console.log("request sent to login")
 
         const data = await response.json(); 
 
         if (response.ok) {
-            if (remember) {
-                document.cookie = `access_token=${data.access}; path=/; secure; HttpOnly; samesite=strict`; 
-                document.cookie = `refresh_token=${data.refresh}; path=/; secure; HttpOnly; samesite=strict`;
-            }
-            // window.location.href = dashboardUrl;
+            localStorage.setItem('access_token', data.access);
+            localStorage.setItem('refresh_token', data.refresh);
+
+            console.log("both cookies written");
             
-            console.log(data);
+            window.location.href = dashboardUrl;
+            
         } else {
             console.log(data);
             document.getElementById('error-message').style.display = 'block';
