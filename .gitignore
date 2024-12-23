@@ -14,3 +14,5 @@ cache/
 blueprint.txt
 
 media/
+
+staticfiles/

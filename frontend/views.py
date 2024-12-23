@@ -68,6 +68,12 @@ def email_verify(request, uidb64, token):
     else:
         return render(request, 'pages/auth/confirmation-failed.html', context=context)
 
+def successful_registration(request):
+    context = {
+        'breadcrumb_title': 'Registration Successful',
+        'breadcrumb_active': 'Registration Successful'
+    }
+    return render(request, 'pages/auth/registration-successful.html', context=context)
 
 # User Profile Views
 def add_listing(request):

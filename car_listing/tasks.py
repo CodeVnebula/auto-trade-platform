@@ -1,6 +1,8 @@
 from PIL import Image
 from pathlib import Path
+from celery import shared_task
 
+@shared_task
 def add_watermark(original_image_path, 
                   watermark_image_path='frontend/static/img/logo/logo-light.png', 
                   transparency=100, 
@@ -46,6 +48,7 @@ def add_watermark(original_image_path,
 
     return f"Watermarked image saved at {original_image_path}"
 
+@shared_task
 def crop_and_resize_image(image_path, 
                           target_width=600, 
                           target_height=400):

@@ -80,6 +80,7 @@
 
     <script>
         var dashboardUrl = "{% url 'frontend:dashboard' %}";
+        console.log(dashboardUrl);
         function togglePasswordVisibility(inputId) {
             var inputField = document.getElementById(inputId);
             var currentType = inputField.type;

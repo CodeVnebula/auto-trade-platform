@@ -13,6 +13,7 @@ from userprofile.models import CompareListings, FacouriteListings
 from messaging.models import UserChats
 from auto_market.utils import contains_prohibited_words
 from .models import EmailConfirmation
+from .tasks import send_mail_task
 
 
 class SignupSerializer(serializers.ModelSerializer):
@@ -95,12 +96,14 @@ class SignupSerializer(serializers.ModelSerializer):
         verification_link = request.build_absolute_uri(
             reverse('frontend:email_verify', kwargs={'uidb64': uid, 'token': token})
         )
-
-        send_mail(
-            subject='Verify your email',
-            message=f'Click the link to verify your email: {verification_link}',
-            from_email=settings.EMAIL_HOST_USER,
-            recipient_list=[user.email],
+        
+        send_mail_task.apply_async(
+            (
+                'Verify your email',
+                f'Click the link to verify your email: {verification_link}',
+                settings.EMAIL_HOST_USER,
+                [user.email]
+            )
         )
 
         return user
@@ -130,11 +133,13 @@ class ResetPasswordRequestSerializer(serializers.Serializer):
             reverse('frontend:password_reset', kwargs={'uidb64': uid, 'token': token})
         )
 
-        send_mail(
-            subject='Reset your password',
-            message=f'Click the link to reset your password: {reset_password_link}',
-            from_email=settings.EMAIL_HOST_USER,
-            recipient_list=[user.email],
+        send_mail_task.apply_async(
+            (
+                'Reset your password',
+                f'Click the link to reset your password: {reset_password_link}',
+                settings.EMAIL_HOST_USER,
+                [user.email]
+            )
         )
     
     
@@ -214,12 +219,13 @@ class SendConfirmationCodeSerializer(serializers.Serializer):
 
         EmailConfirmation.objects.create(email=email, code=code, user=user)
 
-        send_mail(
-            'Your Confirmation Code',
-            f'Your confirmation code is {code}',
-            settings.EMAIL_HOST_USER,
-            [email],
-            fail_silently=False,
+        send_mail_task.apply_async(
+            (
+                'Your Confirmation Code',
+                f'Your confirmation code is {code}',
+                settings.EMAIL_HOST_USER,
+                [email]
+            )
         )
 
         return {'email': email, 'message': 'Confirmation code sent successfully'}

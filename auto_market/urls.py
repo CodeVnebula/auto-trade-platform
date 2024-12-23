@@ -22,6 +22,7 @@ from .swagger import schema_view
 
 from django.conf import settings
 from django.conf.urls.static import static
+from django.views.generic import TemplateView
 
 urlpatterns = [
     path('', include('frontend.urls', namespace='frontend')),
@@ -46,6 +47,8 @@ urlpatterns = [
     ),
     
 ] + debug_toolbar_urls()
+
+handler404 = TemplateView.as_view(template_name='extras/404.html')
 
 if settings.DEBUG:  
     urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

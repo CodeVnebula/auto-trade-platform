@@ -1,6 +1,6 @@
 const BASE_URL = 'http://localhost:8000/api/'
 
-async function signup() {
+async function signup(successUrl) {
     console.log("Signup function called");
     var password = document.getElementById('password').value;
     var confirmPassword = document.getElementById('confirm-password').value;
@@ -28,26 +28,19 @@ async function signup() {
         });
         const jsonResponse = await response.json();
 
-        firstNameError = document.getElementById('error-first-name')
-        lastNameError = document.getElementById('error-last-name')
-        emailError = document.getElementById('error-email')
-        passwordError = document.getElementById('error-password')
-        password2Error = document.getElementById('error-password-2')
-        errorMessage = document.getElementById('error-message')
-        successMessage = document.getElementById('success-message')
+        const firstNameError = document.getElementById('error-first-name')
+        const lastNameError = document.getElementById('error-last-name')
+        const emailError = document.getElementById('error-email')
+        const passwordError = document.getElementById('error-password')
+        const password2Error = document.getElementById('error-password-2')
+        const errorMessage = document.getElementById('error-message')
+        const successMessage = document.getElementById('success-message')
 
             
         if (response.ok) {
+            console.log(successUrl);
+            window.location.href = successUrl;
             console.log(jsonResponse);
-            clearErrorFields(firstNameError,
-                lastNameError, 
-                emailError,
-                passwordError, 
-                password2Error,
-                errorMessage,
-                successMessage)
-            document.getElementById('success-message').style.display = 'block';
-            document.getElementById('success-message').textContent = `წარმატებული რეგისტრაცია, გთხოვთ შეამოწმოთ ელ.ფოსტა ანგარიშის გასააქტიურებლად!`;
         } else {
             clearErrorFields(firstNameError,
                 lastNameError, 

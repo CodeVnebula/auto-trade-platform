@@ -336,8 +336,8 @@ class CarPhoto(models.Model):
     def save(self, *args, **kwargs):
         super().save(*args, **kwargs)
         
-        add_watermark(self.photo.path)
-        crop_and_resize_image(self.photo.path)
+        add_watermark.delay(self.photo.path)
+        crop_and_resize_image.delay(self.photo.path)
         
 
     def __str__(self):

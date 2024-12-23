@@ -2,7 +2,7 @@
 {% load static %}
 
 {% block title %}
-    Confirmation Successful
+    წარმატებული დადასტურება
 {% endblock %}
 
 <body>
@@ -17,10 +17,10 @@
                     <div class="login-form">
                         <div class="login-header">
                             <img src="{% static 'img/logo/logo.png' %}" alt="">
-                            <p>დადასტურება ვერ მოხერხდა! გთხოვთ, სცადოთ თავიდან ან დაუკავშირდით ადმინისტრაციას. შესაძლოა, ბმული მოძველებულია.</p>
+                            <p>თქვენ წარმატებით დარეგისტრირდით, გთხოვთ შეამოწმოთ მითითებული ელ.ფოსტა, სადაც გამოგიგზავნეთ ანგარიშის გასააქტიურებელი ლინკი.</p>
                         </div>
                         <div class="d-flex align-items-center justify-content-center">
-                            <a href="{% url 'frontend:contact' %}" class="theme-btn"><i class="far fa-sign-in-alt"></i> კონტაქტი</a>
+                            <a href="{% url 'frontend:login' %}" class="theme-btn"><i class="far fa-sign-in-alt"></i> შესვლა</a>
                         </div>
                     </div>
                 </div>
@@ -28,6 +28,7 @@
         </div>
     </main>
     {% endblock content %}
+    
 </body>
 
 </html>

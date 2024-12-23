@@ -20,6 +20,7 @@ urlpatterns = [
     path('forgot-password/', views.forgot_password, name='forgot_password'),
     path('password-reset/<uidb64>/<token>', views.password_reset, name='password_reset'),
     path('email/verify/<uidb64>/<token>/', views.email_verify, name='email_verify'),
+    path('successful-registration/', views.successful_registration, name='successful_registration'),
     
     # User Profile
     path('profile/', views.profile, name='profile'),

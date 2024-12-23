@@ -11,7 +11,7 @@ class CarListingFilter(filters.FilterSet):
     engine_volume = filters.RangeFilter(field_name="main_features__engine_volume")
     turbo = filters.BooleanFilter(field_name="main_features__turbo")
     cylinders = filters.NumberFilter(field_name="main_features__cylinders")
-    mileage = filters.RangeFilter(field_name="main_features__mileage")
+    min_mileage = filters.RangeFilter(field_name="main_features__mileage")
     steering_wheel = filters.CharFilter(field_name="main_features__steering_wheel__title", lookup_expr="icontains")
     transmission = filters.CharFilter(field_name="main_features__transmission__title", lookup_expr="icontains")
     drive_wheels = filters.CharFilter(field_name="main_features__drive_wheels__title", lookup_expr="icontains")
@@ -26,7 +26,7 @@ class CarListingFilter(filters.FilterSet):
     price_negotiable = filters.BooleanFilter(field_name="price__price_negotiable")
     exchange_for_another_car = filters.BooleanFilter(field_name="price__exchange_for_another_car")
 
-    location = filters.CharFilter(field_name="location__name", lookup_expr="icontains")
+    location = filters.CharFilter(field_name="location__title", lookup_expr="icontains")
     video_link = filters.CharFilter(field_name="video_link", lookup_expr="icontains")
     is_cleared = filters.BooleanFilter(field_name="is_cleared")
     is_inspected = filters.BooleanFilter(field_name="is_inspected")

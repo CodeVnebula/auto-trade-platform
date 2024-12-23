@@ -5,7 +5,6 @@
 {% endblock %}
 
 {% block stylesheet %}
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
 <link rel="stylesheet" href="{% static 'css/custom-css.css' %}">
 {% endblock stylesheet %}
 
@@ -71,7 +70,7 @@
                                 </label>
                             </div> {% endcomment %}
                             <div class="d-flex align-items-center">
-                                <button type="button" class="theme-btn" onclick="signup()"><i class="far fa-paper-plane"></i> რეგისტრაცია </button>
+                                <button onclick="signup(successUrl)" id="register-button-2" type="button" class="theme-btn"><i class="far fa-paper-plane"></i> რეგისტრაცია </button>
                             </div>
                         </form>
                         <div class="login-footer">
@@ -97,9 +96,29 @@
 
     
     {% block scripts %}
-
     <script src="{% static 'js/auth.js' %}"></script>
+    {% comment %} <script type="module">
+        import { signup } from '{% static "js/auth.js" %}';
+        console.log('Signup function imported');
+
+        document.addEventListener('DOMContentLoaded', () => {
+            console.log('DOM loaded');
+            const registerButton = document.getElementById('register-button-2');
+            console.log(registerButton);
+            const successUrl = "{% url 'frontend:successful_registration' %}";
+            console.log(successUrl);
+            
+            registerButton.addEventListener('click', () => {
+                console.log('Register button clicked');
+                signup(successUrl);
+            });
+            
+            console.log('Event listener added');
+        });
+    </script> {% endcomment %}
+
     <script>
+        var successUrl = "{% url 'frontend:successful_registration' %}";
         function togglePasswordVisibility(inputId) {
             var inputField = document.getElementById(inputId);
             var currentType = inputField.type;
@@ -110,7 +129,9 @@
             icon.classList.toggle('fa-eye');
         }
     </script>
+
     {% endblock scripts %}
+
 
 </body>
 
