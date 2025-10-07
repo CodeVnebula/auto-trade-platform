@@ -1,0 +1,214 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title %}Compare{% endblock %}
+
+<body>
+
+    {% block content %}
+    <main class="main">
+
+        {% include 'components/breadcrumb.html' %}
+        <!-- compare area -->
+        <div class="compare-area py-120">
+            <div class="container">
+                <div class="row">
+                    <div class="col-lg-3" style="float: left;">
+
+                        {% include 'components/user-profile-area.html' %}
+
+                    </div>
+                    <div class="table-responsive col-lg-9">
+                        <table class="table table-bordered compare-table">
+                            <tbody>
+                                <tr>
+                                    <th></th>
+                                    <td><img class="compare-img" src="assets/img/car/01.jpg" alt="product"></td>
+                                    <td><img class="compare-img" src="assets/img/car/02.jpg" alt="product"></td>
+                                    <td><img class="compare-img" src="assets/img/car/03.jpg" alt="product"></td>
+                                </tr>
+                                <tr>
+                                    <th>Title</th>
+                                    <td><h5 class="compare-title">White Tesla Car</h5></td>
+                                    <td><h5 class="compare-title">White Tesla Car</h5></td>
+                                    <td><h5 class="compare-title">White Tesla Car</h5></td>
+                                </tr>
+                                <tr>
+                                    <th>Condition</th>
+                                    <td><span class="badge new">New</span></td>
+                                    <td><span class="badge used">Used</span></td>
+                                    <td><span class="badge new">New</span></td>
+                                </tr>
+                                <tr>
+                                    <th>Body Type</th>
+                                    <td><span>Coupe</span></td>
+                                    <td><span>Wagon</span></td>
+                                    <td><span>Convertible</span></td>
+                                </tr>
+                                <tr>
+                                    <th>Make Brand</th>
+                                    <td><span>Mercedes</span></td>
+                                    <td><span>Ferrari</span></td>
+                                    <td><span>Hyundai</span></td>
+                                </tr>
+                                <tr>
+                                    <th>Build Year</th>
+                                    <td><span>2021</span></td>
+                                    <td><span>2022</span></td>
+                                    <td><span>2023</span></td>
+                                </tr>
+                                <tr>
+                                    <th>Fuel Type</th>
+                                    <td><span>Disel</span></td>
+                                    <td><span>Petrol</span></td>
+                                    <td><span>Disel</span></td>
+                                </tr>
+                                <tr>
+                                    <th>Color</th>
+                                    <td><span>White</span></td>
+                                    <td><span>Yellow</span></td>
+                                    <td><span>Black</span></td>
+                                </tr>
+                                <tr>
+                                    <th>Mileage</th>
+                                    <td><span>18.50 kmpl</span></td>
+                                    <td><span>15.60 kmpl</span></td>
+                                    <td><span>14.39 kmpl</span></td>
+                                </tr>
+                                <tr>
+                                    <th>Price</th>
+                                    <td><span class="compare-price">$65,785</span></td>
+                                    <td><span class="compare-price">$62,560</span></td>
+                                    <td><span class="compare-price">$59,839</span></td>
+                                </tr>
+                                <tr>
+                                    <th>Price Type</th>
+                                    <td><span>Negotiable</span></td>
+                                    <td><span>Fixed</span></td>
+                                    <td><span>Negotiable</span></td>
+                                </tr>
+                                <tr>
+                                    <th>Review</th>
+                                    <td>
+                                        <div class="compare-rate">
+                                            <i class="fas fa-star"></i>
+                                            <i class="fas fa-star"></i>
+                                            <i class="fas fa-star"></i>
+                                            <i class="fas fa-star"></i>
+                                            <i class="fas fa-star"></i>
+                                            <span>5.0 (5k Review)</span>
+                                        </div>
+                                    </td>
+                                    <td>
+                                        <div class="compare-rate">
+                                            <i class="fas fa-star"></i>
+                                            <i class="fas fa-star"></i>
+                                            <i class="fas fa-star"></i>
+                                            <i class="fas fa-star"></i>
+                                            <i class="fas fa-star"></i>
+                                            <span>5.0 (5k Review)</span>
+                                        </div>
+                                    </td>
+                                    <td>
+                                        <div class="compare-rate">
+                                            <i class="fas fa-star"></i>
+                                            <i class="fas fa-star"></i>
+                                            <i class="fas fa-star"></i>
+                                            <i class="fas fa-star"></i>
+                                            <i class="fas fa-star"></i>
+                                            <span>5.0 (5k Review)</span>
+                                        </div>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <th>Transmission</th>
+                                    <td><span>Autometic</span></td>
+                                    <td><span>Manual</span></td>
+                                    <td><span>Autometic</span></td>
+                                </tr>
+                                <tr>
+                                    <th>Driver's Airbag</th>
+                                    <td><span>Yes</span></td>
+                                    <td><span>Yes</span></td>
+                                    <td><span>No</span></td>
+                                </tr>
+                                <tr>
+                                    <th>Engine Size</th>
+                                    <td><span>5.2L</span></td>
+                                    <td><span>5.2L</span></td>
+                                    <td><span>5.2L</span></td>
+                                </tr>
+                                <tr>
+                                    <th>Action</th>
+                                    <td><a href="#" class="theme-btn compare-btn"> <span class="far fa-circle-xmark"></span>Remove</a></td>
+                                    <td><a href="#" class="theme-btn compare-btn"> <span class="far fa-circle-xmark"></span>Remove</a></td>
+                                    <td><a href="#" class="theme-btn compare-btn"> <span class="far fa-circle-xmark"></span>Remove</a></td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- compare area end -->
+
+    </main>
+    {% endblock content %}
+
+    {% block scripts %}
+    <script type="module">
+        import { getProfile, handleProfileImageChange, updateProfileInfo, logout } from '{% static "js/profiles.js" %}';
+        var loginUrl = "{% url 'frontend:login' %}";
+        
+        document.addEventListener('DOMContentLoaded', function() {
+            var logoutBtn = document.getElementById('profile-logout');
+        
+            logoutBtn.addEventListener('click', function() {
+                (async () => {
+                    const response = await logout(loginUrl);
+                })();
+            });
+        });
+        
+        document.addEventListener('DOMContentLoaded', function() {
+            document.getElementById('compare-link').classList.add('active');
+            
+            console.log("DOMContentLoaded event fired");
+            (async () => {
+                const data = await getProfile(loginUrl);
+                console.log("data: ", data);
+
+                if (data.profile_picture) {
+                    document.getElementById('profile-picture').src = data.profile_picture;
+                } else {
+                    document.getElementById('profile-picture').src = "{% static 'img/account/user.png' %}";
+                }
+                document.getElementById('full-name').innerText = data.user.first_name + " " + data.user.last_name;
+                document.getElementById('email1').innerText = data.user.email;
+                document.getElementById('chats-count').innerText = data.chats_count;
+
+                document.getElementById('first-name').value = data.user.first_name;
+                document.getElementById('last-name').value = data.user.last_name;
+                document.getElementById('email').value = data.user.email;
+                if (data.user.phone) 
+                    document.getElementById('phone').value = data.user.phone;
+                if (data.user.address) 
+                    document.getElementById('address').value = data.user.address;
+                
+            })();
+        });
+
+        document.querySelector('.profile-img-file').addEventListener('change', function() {
+            (async () => {
+                const response = await handleProfileImageChange(loginUrl, this.files[0]);
+                const data = await response.json();
+                document.getElementById('profile-picture').src = data.profile_picture;
+                console.log("Profile picture updated successfully:", data);
+                
+            })();
+        });
+    </script>
+    {% endblock scripts %}
+
+</body>
+
+</html>

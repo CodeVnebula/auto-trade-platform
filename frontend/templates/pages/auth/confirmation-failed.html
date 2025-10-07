@@ -1,0 +1,33 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}
+    Confirmation Successful
+{% endblock %}
+
+<body>
+    
+    {% block content %}
+    <main class="main">
+        {% include 'components/breadcrumb.html' %}
+
+        <div class="login-area py-120">
+            <div class="container">
+                <div class="col-md-5 mx-auto">
+                    <div class="login-form">
+                        <div class="login-header">
+                            <img src="{% static 'img/logo/logo.png' %}" alt="">
+                            <p>დადასტურება ვერ მოხერხდა! გთხოვთ, სცადოთ თავიდან ან დაუკავშირდით ადმინისტრაციას. შესაძლოა, ბმული მოძველებულია.</p>
+                        </div>
+                        <div class="d-flex align-items-center justify-content-center">
+                            <a href="{% url 'frontend:contact' %}" class="theme-btn"><i class="far fa-sign-in-alt"></i> კონტაქტი</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+    {% endblock content %}
+</body>
+
+</html>

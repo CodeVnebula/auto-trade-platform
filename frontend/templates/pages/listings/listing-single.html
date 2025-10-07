@@ -1,0 +1,30 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}Car Details{% endblock title %}
+
+{% block stylesheet %}
+    <link rel="stylesheet" href="{% static 'css/flex-slider.min.css' %}">
+{% endblock stylesheet %}
+
+<body>
+
+    {% block content %}
+        <main class="main">
+
+            {% include 'components/breadcrumb.html' %}
+
+
+            {% include 'components/car-single.html' %}
+
+        </main>
+    {% endblock content %}
+   
+   {% block scripts %}
+        <script src="{% static 'js/flex-slider.js' %}"></script>
+   {% endblock scripts %}
+
+
+</body>
+
+</html>

@@ -1,0 +1,138 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title %}
+    Register
+{% endblock %}
+
+{% block stylesheet %}
+<link rel="stylesheet" href="{% static 'css/custom-css.css' %}">
+{% endblock stylesheet %}
+
+
+<body>
+
+    {% block content %} 
+    <main class="main">
+
+        {% include 'components/breadcrumb.html' %}
+
+        <!-- register area -->
+        <div class="login-area py-120">
+            <div class="container">
+                <div class="col-md-5 mx-auto">
+                    <div class="login-form">
+                        <div class="login-header">
+                            <img src="{% static 'img/logo/logo.png' %}" alt="">
+                            <p>შექმენით თქვენი motex ანგარიში</p>
+                        </div>
+                        <form action="#">
+                            <div id="success-message" style="color: green; display: none;"></div>
+                            <div class="form-group">
+                                <label>სახელი</label>
+                                <input type="text" class="form-control" placeholder="შეიყვანეთ თქვენი სახელი" id="first-name">
+                                <div id="error-first-name" style="color: red; display: none;"></div>
+                            </div>
+
+                            <div class="form-group">
+                                <label>გვარი</label>
+                                <input type="text" class="form-control" placeholder="შეიყვანეთ თქვენი გვარი" id="last-name">
+                                <div id="error-last-name" style="color: red; display: none;"></div>
+                            </div>
+
+                            <div class="form-group">
+                                <label>ელ.ფოსტა</label>
+                                <input type="email" class="form-control" placeholder="შეიყვანეთ თქვენი ემაილი" id="email">
+                                <div id="error-email" style="color: red; display: none;"></div>
+                            </div>
+                            
+                            <div class="form-group">
+                                <label>პაროლი</label>
+                                <div class="input-container">
+                                    <input type="password" class="form-control" placeholder="შეიყვანეთ თქვენი პაროლი" id="password">
+                                    <i class="fas fa-eye toggle-password" onclick="togglePasswordVisibility('password')"></i>
+                                </div>
+                                <div id="error-password" style="color: red; display: none;"></div>
+                            </div>
+                            
+                            <div class="form-group">
+                                <label>გაიმეორეთ პაროლი</label>
+                                <div class="input-container">
+                                    <input type="password" class="form-control" placeholder="გაიმეორეთ თქვენი პაროლი" id="confirm-password">
+                                    <i class="fas fa-eye toggle-password" onclick="togglePasswordVisibility('confirm-password')"></i>
+                                    <div id="error-password-2" style="color: red; display: none;"></div>
+                                </div>
+                            </div>
+                            <div id="error-message" style="color: red; display: none;"></div>
+                            {% comment %} <div class="form-check form-group">
+                                <input class="form-check-input" type="checkbox" value="" id="agree">
+                                <label class="form-check-label" for="agree">
+                                   I agree with the <a href="#">Terms Of Service.</a>
+                                </label>
+                            </div> {% endcomment %}
+                            <div class="d-flex align-items-center">
+                                <button onclick="signup(successUrl)" id="register-button-2" type="button" class="theme-btn"><i class="far fa-paper-plane"></i> რეგისტრაცია </button>
+                            </div>
+                        </form>
+                        <div class="login-footer">
+                            <p>არსებული ანგარიშით <a href="{% url 'frontend:login' %}">შესვლა.</a></p>
+                            <div class="social-login">
+                                <p>გააგრძელეთ სხვა ანგარიშით</p>
+                                <div class="social-login-list">
+                                    <a href="#"><i class="fab fa-facebook-f"></i></a>
+                                    <a href="#"><i class="fab fa-google"></i></a>
+                                    <a href="#"><i class="fab fa-twitter"></i></a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- register area end -->
+
+
+    </main>
+    {% endblock content %}
+
+    
+    {% block scripts %}
+    <script src="{% static 'js/auth.js' %}"></script>
+    {% comment %} <script type="module">
+        import { signup } from '{% static "js/auth.js" %}';
+        console.log('Signup function imported');
+
+        document.addEventListener('DOMContentLoaded', () => {
+            console.log('DOM loaded');
+            const registerButton = document.getElementById('register-button-2');
+            console.log(registerButton);
+            const successUrl = "{% url 'frontend:successful_registration' %}";
+            console.log(successUrl);
+            
+            registerButton.addEventListener('click', () => {
+                console.log('Register button clicked');
+                signup(successUrl);
+            });
+            
+            console.log('Event listener added');
+        });
+    </script> {% endcomment %}
+
+    <script>
+        var successUrl = "{% url 'frontend:successful_registration' %}";
+        function togglePasswordVisibility(inputId) {
+            var inputField = document.getElementById(inputId);
+            var currentType = inputField.type;
+            inputField.type = currentType === "password" ? "text" : "password";
+            
+            var icon = document.querySelector(`#${inputId} + .toggle-password`);
+            icon.classList.toggle('fa-eye-slash');
+            icon.classList.toggle('fa-eye');
+        }
+    </script>
+
+    {% endblock scripts %}
+
+
+</body>
+
+</html>

@@ -15,8 +15,42 @@ Including another URLconf
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
 from django.contrib import admin
-from django.urls import path
+from django.urls import include, path
+from debug_toolbar.toolbar import debug_toolbar_urls
+
+from .swagger import schema_view
+
+from django.conf import settings
+from django.conf.urls.static import static
+from django.views.generic import TemplateView
 
 urlpatterns = [
+    path('', include('frontend.urls', namespace='frontend')),
     path('admin/', admin.site.urls),
-]
+    path('api/', include(
+        [
+            path('', include('authentication.urls', namespace='auth')),
+            path('', include('car_listing.urls', namespace='car_listing')),
+            path('myprofile/', include('userprofile.urls', namespace='profiles')),
+            path('messaging/', include('messaging.urls', namespace='messaging')),
+        ]
+    )),
+    path(
+        'swagger/', 
+        schema_view.with_ui('swagger', cache_timeout=0), 
+        name='schema-swagger-ui'
+    ),
+    path(
+        'redoc/', 
+        schema_view.with_ui('redoc', cache_timeout=0), 
+        name='schema-redoc'
+    ),
+    
+] + debug_toolbar_urls()
+
+handler404 = TemplateView.as_view(template_name='extras/404.html')
+
+if settings.DEBUG:  
+    urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
+    urlpatterns += static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
+

@@ -1,0 +1,679 @@
+{% extends 'base.html' %}
+
+{% block title %}Home{% endblock title %}
+
+
+
+<body>
+    {% block content %}
+
+    <main class="main">
+
+        {% include 'components/hero-slider.html' %}
+
+
+        {% include 'components/car-filter-form.html' %}
+
+
+        {% include 'components/about-area.html' %}
+        
+
+        {% include 'components/counter-area.html' %}
+
+
+
+        {% comment %} <!-- car area -->
+        <div class="car-area bg py-120">
+            <div class="container">
+                <div class="row">
+                    <div class="col-lg-6 mx-auto">
+                        <div class="site-heading text-center">
+                            <span class="site-title-tagline"><i class="flaticon-drive"></i> New Arrivals</span>
+                            <h2 class="site-title">Let's Check Latest <span>Cars</span></h2>
+                            <div class="heading-divider"></div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-6 col-lg-4 col-xl-3">
+                        <div class="car-item wow fadeInUp" data-wow-delay=".25s">
+                            <div class="car-img">
+                                <span class="car-status status-1">Used</span>
+                                <img src="assets/img/car/01.jpg" alt="">
+                                <div class="car-btns">
+                                    <a href="#"><i class="far fa-heart"></i></a>
+                                    <a href="#"><i class="far fa-arrows-repeat"></i></a>
+                                </div>
+                            </div>
+                            <div class="car-content">
+                                <div class="car-top">
+                                    <h4><a href="#">Mercedes Benz Car</a></h4>
+                                    <div class="car-rate">
+                                        <i class="fas fa-star"></i>
+                                        <i class="fas fa-star"></i>
+                                        <i class="fas fa-star"></i>
+                                        <i class="fas fa-star"></i>
+                                        <i class="fas fa-star"></i>
+                                        <span>5.0 (58.5k Review)</span>
+                                    </div>
+                                </div>
+                                <ul class="car-list">
+                                    <li><i class="far fa-steering-wheel"></i>Automatic</li>
+                                    <li><i class="far fa-road"></i>10.15km / 1-litre</li>
+                                    <li><i class="far fa-car"></i>Model: 2023</li>
+                                    <li><i class="far fa-gas-pump"></i>Hybrid</li>
+                                </ul>
+                                <div class="car-footer">
+                                    <span class="car-price">$45,620</span>
+                                    <a href="#" class="theme-btn"><span class="far fa-eye"></span>Details</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6 col-lg-4 col-xl-3">
+                        <div class="car-item wow fadeInUp" data-wow-delay=".50s">
+                            <div class="car-img">
+                                <img src="assets/img/car/02.jpg" alt="">
+                                <div class="car-btns">
+                                    <a href="#"><i class="far fa-heart"></i></a>
+                                    <a href="#"><i class="far fa-arrows-repeat"></i></a>
+                                </div>
+                            </div>
+                            <div class="car-content">
+                                <div class="car-top">
+                                    <h4><a href="#">Yellow Ferrari 458</a></h4>
+                                    <div class="car-rate">
+                                        <i class="fas fa-star"></i>
+                                        <i class="fas fa-star"></i>
+                                        <i class="fas fa-star"></i>
+                                        <i class="fas fa-star"></i>
+                                        <i class="fas fa-star"></i>
+                                        <span>5.0 (58.5k Review)</span>
+                                    </div>
+                                </div>
+                                <ul class="car-list">
+                                    <li><i class="far fa-steering-wheel"></i>Automatic</li>
+                                    <li><i class="far fa-road"></i>10.15km / 1-litre</li>
+                                    <li><i class="far fa-car"></i>Model: 2023</li>
+                                    <li><i class="far fa-gas-pump"></i>Hybrid</li>
+                                </ul>
+                                <div class="car-footer">
+                                    <span class="car-price">$90,250</span>
+                                    <a href="#" class="theme-btn"><span class="far fa-eye"></span>Details</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6 col-lg-4 col-xl-3">
+                        <div class="car-item wow fadeInUp" data-wow-delay=".75s">
+                            <div class="car-img">
+                                <img src="assets/img/car/03.jpg" alt="">
+                                <div class="car-btns">
+                                    <a href="#"><i class="far fa-heart"></i></a>
+                                    <a href="#"><i class="far fa-arrows-repeat"></i></a>
+                                </div>
+                            </div>
+                            <div class="car-content">
+                                <div class="car-top">
+                                    <h4><a href="#">Black Audi Q7</a></h4>
+                                    <div class="car-rate">
+                                        <i class="fas fa-star"></i>
+                                        <i class="fas fa-star"></i>
+                                        <i class="fas fa-star"></i>
+                                        <i class="fas fa-star"></i>
+                                        <i class="fas fa-star"></i>
+                                        <span>5.0 (58.5k Review)</span>
+                                    </div>
+                                </div>
+                                <ul class="car-list">
+                                    <li><i class="far fa-steering-wheel"></i>Automatic</li>
+                                    <li><i class="far fa-road"></i>10.15km / 1-litre</li>
+                                    <li><i class="far fa-car"></i>Model: 2023</li>
+                                    <li><i class="far fa-gas-pump"></i>Hybrid</li>
+                                </ul>
+                                <div class="car-footer">
+                                    <span class="car-price">$44,350</span>
+                                    <a href="#" class="theme-btn"><span class="far fa-eye"></span>Details</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6 col-lg-4 col-xl-3">
+                        <div class="car-item wow fadeInUp" data-wow-delay="1s">
+                            <div class="car-img">
+                                <span class="car-status status-2">New</span>
+                                <img src="assets/img/car/04.jpg" alt="">
+                                <div class="car-btns">
+                                    <a href="#"><i class="far fa-heart"></i></a>
+                                    <a href="#"><i class="far fa-arrows-repeat"></i></a>
+                                </div>
+                            </div>
+                            <div class="car-content">
+                                <div class="car-top">
+                                    <h4><a href="#">BMW Sports Car</a></h4>
+                                    <div class="car-rate">
+                                        <i class="fas fa-star"></i>
+                                        <i class="fas fa-star"></i>
+                                        <i class="fas fa-star"></i>
+                                        <i class="fas fa-star"></i>
+                                        <i class="fas fa-star"></i>
+                                        <span>5.0 (58.5k Review)</span>
+                                    </div>
+                                </div>
+                                <ul class="car-list">
+                                    <li><i class="far fa-steering-wheel"></i>Automatic</li>
+                                    <li><i class="far fa-road"></i>10.15km / 1-litre</li>
+                                    <li><i class="far fa-car"></i>Model: 2023</li>
+                                    <li><i class="far fa-gas-pump"></i>Hybrid</li>
+                                </ul>
+                                <div class="car-footer">
+                                    <span class="car-price">$78,760</span>
+                                    <a href="#" class="theme-btn"><span class="far fa-eye"></span>Details</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6 col-lg-4 col-xl-3">
+                        <div class="car-item wow fadeInUp" data-wow-delay=".25s">
+                            <div class="car-img">
+                                <span class="car-status status-1">Used</span>
+                                <img src="assets/img/car/05.jpg" alt="">
+                                <div class="car-btns">
+                                    <a href="#"><i class="far fa-heart"></i></a>
+                                    <a href="#"><i class="far fa-arrows-repeat"></i></a>
+                                </div>
+                            </div>
+                            <div class="car-content">
+                                <div class="car-top">
+                                    <h4><a href="#">White Tesla Car</a></h4>
+                                    <div class="car-rate">
+                                        <i class="fas fa-star"></i>
+                                        <i class="fas fa-star"></i>
+                                        <i class="fas fa-star"></i>
+                                        <i class="fas fa-star"></i>
+                                        <i class="fas fa-star"></i>
+                                        <span>5.0 (58.5k Review)</span>
+                                    </div>
+                                </div>
+                                <ul class="car-list">
+                                    <li><i class="far fa-steering-wheel"></i>Automatic</li>
+                                    <li><i class="far fa-road"></i>10.15km / 1-litre</li>
+                                    <li><i class="far fa-car"></i>Model: 2023</li>
+                                    <li><i class="far fa-gas-pump"></i>Hybrid</li>
+                                </ul>
+                                <div class="car-footer">
+                                    <span class="car-price">$64,230</span>
+                                    <a href="#" class="theme-btn"><span class="far fa-eye"></span>Details</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6 col-lg-4 col-xl-3">
+                        <div class="car-item wow fadeInUp" data-wow-delay=".50s">
+                            <div class="car-img">
+                                <span class="car-status status-2">New</span>
+                                <img src="assets/img/car/06.jpg" alt="">
+                                <div class="car-btns">
+                                    <a href="#"><i class="far fa-heart"></i></a>
+                                    <a href="#"><i class="far fa-arrows-repeat"></i></a>
+                                </div>
+                            </div>
+                            <div class="car-content">
+                                <div class="car-top">
+                                    <h4><a href="#">White Nissan Car</a></h4>
+                                    <div class="car-rate">
+                                        <i class="fas fa-star"></i>
+                                        <i class="fas fa-star"></i>
+                                        <i class="fas fa-star"></i>
+                                        <i class="fas fa-star"></i>
+                                        <i class="fas fa-star"></i>
+                                        <span>5.0 (58.5k Review)</span>
+                                    </div>
+                                </div>
+                                <ul class="car-list">
+                                    <li><i class="far fa-steering-wheel"></i>Automatic</li>
+                                    <li><i class="far fa-road"></i>10.15km / 1-litre</li>
+                                    <li><i class="far fa-car"></i>Model: 2023</li>
+                                    <li><i class="far fa-gas-pump"></i>Hybrid</li>
+                                </ul>
+                                <div class="car-footer">
+                                    <span class="car-price">$34,540</span>
+                                    <a href="#" class="theme-btn"><span class="far fa-eye"></span>Details</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6 col-lg-4 col-xl-3">
+                        <div class="car-item wow fadeInUp" data-wow-delay=".75s">
+                            <div class="car-img">
+                                <img src="assets/img/car/07.jpg" alt="">
+                                <div class="car-btns">
+                                    <a href="#"><i class="far fa-heart"></i></a>
+                                    <a href="#"><i class="far fa-arrows-repeat"></i></a>
+                                </div>
+                            </div>
+                            <div class="car-content">
+                                <div class="car-top">
+                                    <h4><a href="#">Mercedes Benz Suv</a></h4>
+                                    <div class="car-rate">
+                                        <i class="fas fa-star"></i>
+                                        <i class="fas fa-star"></i>
+                                        <i class="fas fa-star"></i>
+                                        <i class="fas fa-star"></i>
+                                        <i class="fas fa-star"></i>
+                                        <span>5.0 (58.5k Review)</span>
+                                    </div>
+                                </div>
+                                <ul class="car-list">
+                                    <li><i class="far fa-steering-wheel"></i>Automatic</li>
+                                    <li><i class="far fa-road"></i>10.15km / 1-litre</li>
+                                    <li><i class="far fa-car"></i>Model: 2023</li>
+                                    <li><i class="far fa-gas-pump"></i>Hybrid</li>
+                                </ul>
+                                <div class="car-footer">
+                                    <span class="car-price">$75,820</span>
+                                    <a href="#" class="theme-btn"><span class="far fa-eye"></span>Details</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6 col-lg-4 col-xl-3">
+                        <div class="car-item wow fadeInUp" data-wow-delay="1s">
+                            <div class="car-img">
+                                <img src="assets/img/car/08.jpg" alt="">
+                                <div class="car-btns">
+                                    <a href="#"><i class="far fa-heart"></i></a>
+                                    <a href="#"><i class="far fa-arrows-repeat"></i></a>
+                                </div>
+                            </div>
+                            <div class="car-content">
+                                <div class="car-top">
+                                    <h4><a href="#">Red Hyundai Car</a></h4>
+                                    <div class="car-rate">
+                                        <i class="fas fa-star"></i>
+                                        <i class="fas fa-star"></i>
+                                        <i class="fas fa-star"></i>
+                                        <i class="fas fa-star"></i>
+                                        <i class="fas fa-star"></i>
+                                        <span>5.0 (58.5k Review)</span>
+                                    </div>
+                                </div>
+                                <ul class="car-list">
+                                    <li><i class="far fa-steering-wheel"></i>Automatic</li>
+                                    <li><i class="far fa-road"></i>10.15km / 1-litre</li>
+                                    <li><i class="far fa-car"></i>Model: 2023</li>
+                                    <li><i class="far fa-gas-pump"></i>Hybrid</li>
+                                </ul>
+                                <div class="car-footer">
+                                    <span class="car-price">$25,620</span>
+                                    <a href="#" class="theme-btn"><span class="far fa-eye"></span>Details</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="text-center mt-4">
+                    <a href="#" class="theme-btn">Load More <i class="far fa-arrow-rotate-right"></i> </a>
+                </div>
+            </div>
+        </div>
+        <!-- car area end --> {% endcomment %}
+
+
+        {% include 'components/car-category-area.html' %}
+
+
+        {% include 'components/video-area.html' %}
+        
+
+        <!-- car dealer -->
+        <div class="car-dealer pb-120">
+            <div class="container">
+                <div class="row">
+                    <div class="col-lg-6 mx-auto">
+                        <div class="site-heading text-center">
+                            <span class="site-title-tagline"><i class="flaticon-drive"></i> Car Dealers</span>
+                            <h2 class="site-title">Best Dealers In <span>Your City</span></h2>
+                            <div class="heading-divider"></div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-6 col-lg-3">
+                        <div class="dealer-item wow fadeInUp" data-wow-delay=".25s">
+                            <div class="dealer-img">
+                                <span class="dealer-listing">25 Listing</span>
+                                <img src="assets/img/dealer/01.png" alt="">
+                            </div>
+                            <div class="dealer-content">
+                                <h4><a href="#">Automotive Gear</a></h4>
+                                <ul>
+                                    <li><i class="far fa-location-dot"></i> 25/B Milford Road, New York</li>
+                                    <li><i class="far fa-phone"></i> <a href="tel:+21236547898">+2 123 654 7898</a></li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6 col-lg-3">
+                        <div class="dealer-item wow fadeInUp" data-wow-delay=".50s">
+                            <div class="dealer-img">
+                                <span class="dealer-listing">35 Listing</span>
+                                <img src="assets/img/dealer/02.png" alt="">
+                            </div>
+                            <div class="dealer-content">
+                                <h4><a href="#">Keithson Car</a></h4>
+                                <ul>
+                                    <li><i class="far fa-location-dot"></i> 25/B Milford Road, New York</li>
+                                    <li><i class="far fa-phone"></i> <a href="tel:+21236547898">+2 123 654 7898</a></li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6 col-lg-3">
+                        <div class="dealer-item wow fadeInUp" data-wow-delay=".75s">
+                            <div class="dealer-img">
+                                <span class="dealer-listing">15 Listing</span>
+                                <img src="assets/img/dealer/03.png" alt="">
+                            </div>
+                            <div class="dealer-content">
+                                <h4><a href="#">Superious Automotive</a></h4>
+                                <ul>
+                                    <li><i class="far fa-location-dot"></i> 25/B Milford Road, New York</li>
+                                    <li><i class="far fa-phone"></i> <a href="tel:+21236547898">+2 123 654 7898</a></li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6 col-lg-3">
+                        <div class="dealer-item wow fadeInUp" data-wow-delay="1s">
+                            <div class="dealer-img">
+                                <span class="dealer-listing">20 Listing</span>
+                                <img src="assets/img/dealer/04.png" alt="">
+                            </div>
+                            <div class="dealer-content">
+                                <h4><a href="#">Racing Gear Car</a></h4>
+                                <ul>
+                                    <li><i class="far fa-location-dot"></i> 25/B Milford Road, New York</li>
+                                    <li><i class="far fa-phone"></i> <a href="tel:+21236547898">+2 123 654 7898</a></li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6 col-lg-3">
+                        <div class="dealer-item wow fadeInUp" data-wow-delay=".25s">
+                            <div class="dealer-img">
+                                <span class="dealer-listing">19 Listing</span>
+                                <img src="assets/img/dealer/05.png" alt="">
+                            </div>
+                            <div class="dealer-content">
+                                <h4><a href="#">Car Showromio</a></h4>
+                                <ul>
+                                    <li><i class="far fa-location-dot"></i> 25/B Milford Road, New York</li>
+                                    <li><i class="far fa-phone"></i> <a href="tel:+21236547898">+2 123 654 7898</a></li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6 col-lg-3">
+                        <div class="dealer-item wow fadeInUp" data-wow-delay=".50s">
+                            <div class="dealer-img">
+                                <span class="dealer-listing">40 Listing</span>
+                                <img src="assets/img/dealer/06.png" alt="">
+                            </div>
+                            <div class="dealer-content">
+                                <h4><a href="#">Fastspeedio Car</a></h4>
+                                <ul>
+                                    <li><i class="far fa-location-dot"></i> 25/B Milford Road, New York</li>
+                                    <li><i class="far fa-phone"></i> <a href="tel:+21236547898">+2 123 654 7898</a></li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6 col-lg-3">
+                        <div class="dealer-item wow fadeInUp" data-wow-delay=".75s">
+                            <div class="dealer-img">
+                                <span class="dealer-listing">59 Listing</span>
+                                <img src="assets/img/dealer/07.png" alt="">
+                            </div>
+                            <div class="dealer-content">
+                                <h4><a href="#">Star AutoMall</a></h4>
+                                <ul>
+                                    <li><i class="far fa-location-dot"></i> 25/B Milford Road, New York</li>
+                                    <li><i class="far fa-phone"></i> <a href="tel:+21236547898">+2 123 654 7898</a></li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6 col-lg-3">
+                        <div class="dealer-item wow fadeInUp" data-wow-delay="1s">
+                            <div class="dealer-img">
+                                <span class="dealer-listing">28 Listing</span>
+                                <img src="assets/img/dealer/08.png" alt="">
+                            </div>
+                            <div class="dealer-content">
+                                <h4><a href="#">Superspeed Auto</a></h4>
+                                <ul>
+                                    <li><i class="far fa-location-dot"></i> 25/B Milford Road, New York</li>
+                                    <li><i class="far fa-phone"></i> <a href="tel:+21236547898">+2 123 654 7898</a></li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- car dealer end-->
+
+
+        <!-- choose area -->
+        <div class="choose-area py-120">
+            <div class="container">
+                <div class="row align-items-center">
+                    <div class="col-lg-6">
+                        <div class="choose-content">
+                            <div class="site-heading wow fadeInDown" data-wow-delay=".25s">
+                                <span class="site-title-tagline text-white justify-content-start">
+                                    <i class="flaticon-drive"></i> Why Choose Us
+                                </span>
+                                <h2 class="site-title text-white mb-10">We are dedicated <span>to provide</span> quality service</h2>
+                                <p class="text-white">
+                                    There are many variations of passages available but the majority have suffered alteration in some form going to use a passage by injected humour randomised words which don't look even slightly believable. 
+                                </p>
+                            </div>
+                            <div class="choose-img wow fadeInUp" data-wow-delay=".25s">
+                                <img src="assets/img/choose/01.png" alt="">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-6">
+                        <div class="choose-content-wrapper wow fadeInRight" data-wow-delay=".25s">
+                            <div class="row">
+                                <div class="col-md-6 col-lg-6 mt-lg-5">
+                                    <div class="choose-item">
+                                        <span class="choose-count">01</span>
+                                        <div class="choose-item-icon">
+                                            <i class="flaticon-car"></i>
+                                        </div>
+                                        <div class="choose-item-info">
+                                            <h3>Best Quality Cars</h3>
+                                            <p>There are many variations of the passages available but the
+                                                majo have suffered fact that reader will be dist alteration.</p>
+                                        </div>
+                                    </div>
+                                    <div class="choose-item mb-lg-0">
+                                        <span class="choose-count">03</span>
+                                        <div class="choose-item-icon">
+                                            <i class="flaticon-drive-thru"></i>
+                                        </div>
+                                        <div class="choose-item-info">
+                                            <h3>Popular Brands</h3>
+                                            <p>There are many variations of the passages available but the
+                                                majo have suffered fact that reader will be dist alteration.</p>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-6 col-lg-6">
+                                    <div class="choose-item">
+                                        <span class="choose-count">02</span>
+                                        <div class="choose-item-icon">
+                                            <i class="flaticon-chauffeur"></i>
+                                        </div>
+                                        <div class="choose-item-info">
+                                            <h3>Certified Mechanics</h3>
+                                            <p>There are many variations of the passages available but the
+                                                majo have suffered fact that reader will be dist alteration.</p>
+                                        </div>
+                                    </div>
+                                    <div class="choose-item mb-lg-0">
+                                        <span class="choose-count">04</span>
+                                        <div class="choose-item-icon">
+                                            <i class="flaticon-online-payment"></i>
+                                        </div>
+                                        <div class="choose-item-info">
+                                            <h3>Reasonable Price</h3>
+                                            <p>There are many variations of the passages available but the
+                                                majo have suffered fact that reader will be dist alteration.</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- choose area end -->
+
+
+        {% include 'components/car-brand.html' %}
+        
+
+        {% include 'components/testimonial-area.html' %}
+        
+
+        
+        <!-- blog area -->
+        <div class="blog-area py-120">
+            <div class="container">
+                <div class="row">
+                    <div class="col-lg-6 mx-auto">
+                        <div class="site-heading text-center">
+                            <span class="site-title-tagline"><i class="flaticon-drive"></i> Our Blog</span>
+                            <h2 class="site-title">Latest News & <span>Blog</span></h2>
+                            <div class="heading-divider"></div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-6 col-lg-4">
+                        <div class="blog-item wow fadeInUp" data-wow-delay=".25s">
+                            <div class="blog-item-img">
+                                <img src="assets/img/blog/01.jpg" alt="Thumb">
+                            </div>
+                            <div class="blog-item-info">
+                                <div class="blog-item-meta">
+                                    <ul>
+                                        <li><a href="#"><i class="far fa-user-circle"></i> By Alicia Davis</a></li>
+                                        <li><a href="#"><i class="far fa-calendar-alt"></i> January 29, 2023</a></li>
+                                    </ul>
+                                </div>
+                                <h4 class="blog-title">
+                                    <a href="#">There are many variations of passage available.</a>
+                                </h4>
+                                <a class="theme-btn" href="#">Read More<i class="fas fa-arrow-right-long"></i></a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6 col-lg-4">
+                        <div class="blog-item wow fadeInUp" data-wow-delay=".50s">
+                            <div class="blog-item-img">
+                                <img src="assets/img/blog/02.jpg" alt="Thumb">
+                            </div>
+                            <div class="blog-item-info">
+                                <div class="blog-item-meta">
+                                    <ul>
+                                        <li><a href="#"><i class="far fa-user-circle"></i> By Alicia Davis</a></li>
+                                        <li><a href="#"><i class="far fa-calendar-alt"></i> January 29, 2023</a></li>
+                                    </ul>
+                                </div>
+                                <h4 class="blog-title">
+                                    <a href="#">There are many variations of passage available.</a>
+                                </h4>
+                                <a class="theme-btn" href="#">Read More<i class="fas fa-arrow-right-long"></i></a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6 col-lg-4">
+                        <div class="blog-item wow fadeInUp" data-wow-delay=".75s">
+                            <div class="blog-item-img">
+                                <img src="assets/img/blog/03.jpg" alt="Thumb">
+                            </div>
+                            <div class="blog-item-info">
+                                <div class="blog-item-meta">
+                                    <ul>
+                                        <li><a href="#"><i class="far fa-user-circle"></i> By Alicia Davis</a></li>
+                                        <li><a href="#"><i class="far fa-calendar-alt"></i> January 29, 2023</a></li>
+                                    </ul>
+                                </div>
+                                <h4 class="blog-title">
+                                    <a href="#">There are many variations of passage available.</a>
+                                </h4>
+                                <a class="theme-btn" href="#">Read More<i class="fas fa-arrow-right-long"></i></a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- blog area end -->
+
+
+        <!-- download area -->
+        <div class="download-area mb-120">
+            <div class="container">
+                <div class="download-wrapper">
+                    <div class="row">
+                        <div class="col-lg-6">
+                            <div class="download-content">
+                                <div class="site-heading mb-4">
+                                    <span class="site-title-tagline justify-content-start">
+                                        <i class="flaticon-drive"></i> Get Our App
+                                    </span>
+                                    <h2 class="site-title mb-10">Download <span>Our Motex</span> App For Free</h2>
+                                    <p>
+                                        There are many variations of passages available but the majority have suffered in some form going to use a passage by injected humour. 
+                                    </p>
+                                </div>
+                                <div class="download-btn">
+                                    <a href="#">
+                                        <i class="fab fa-google-play"></i>
+                                        <div class="download-btn-content">
+                                            <span>Get It On</span>
+                                            <strong>Google Play</strong>
+                                        </div>
+                                    </a>
+                                    <a href="#">
+                                        <i class="fab fa-app-store"></i>
+                                        <div class="download-btn-content">
+                                            <span>Get It On</span>
+                                            <strong>App Store</strong>
+                                        </div>
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="download-img">
+                        <img src="assets/img/download/01.png" alt="">
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- download area end -->
+
+    </main>
+
+    {% endblock content %}
+</body>
+
+</html>

@@ -1,0 +1,60 @@
+{% load static %}
+<div class="main-navigation">
+    <nav class="navbar navbar-expand-lg">
+        <div class="container position-relative">
+            <a class="navbar-brand" href="{% url 'frontend:home' %}">
+                <img src="{% static 'img/logo/logo.png' %}" alt="logo">
+            </a>
+            <div class="mobile-menu-right">
+                <div class="search-btn">
+                    <button type="button" class="nav-right-link"><i class="far fa-search"></i></button>
+                </div>
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
+                    data-bs-target="#main_nav" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-mobile-icon"><i class="far fa-bars"></i></span>
+                </button>
+            </div>
+            <div class="collapse navbar-collapse" id="main_nav">
+                <ul class="navbar-nav">
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle active" href="{% url 'frontend:home' %}">მთავარი</a>
+                    </li>
+                    <li class="nav-item"><a class="nav-link" href="{% url 'frontend:about' %}">ჩვენს შესახებ</a></li>
+                    <li class="nav-item"><a class="nav-link" href="{% url 'frontend:contact' %}">კონტაქტი</a></li>
+                    
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" data-bs-toggle="dropdown">ჩემი პროფილი</a>
+                        <ul class="dropdown-menu fade-down">
+                            
+                            <li><a class="dropdown-item" href="{% url 'frontend:dashboard' %}"><i class="far fa-home"></i> მთავარი</a></li>
+                            <li><a class="dropdown-item" href="{% url 'frontend:profile' %}"><i class="far fa-user"></i> პროფილი</a></li>
+                            <li><a class="dropdown-item" href="{% url 'frontend:profile_listings' %}"><i class="far fa-list"></i> ჩემი განცხადებები</a></li>
+                            <li><a class="dropdown-item" href="{% url 'frontend:add_listing' %}"><i class="far fa-plus-circle"></i> განცხადების დამატება</a></li>
+                            <li><a class="dropdown-item" href="{% url 'frontend:favourites' %}"><i class="far fa-heart"></i> ფავორიტები</a></li>
+                            <li><a class="dropdown-item" href="{% url 'frontend:compare' %}"><i class="far fa-exchange-alt"></i> შედარება</a></li>
+                            <li><a class="dropdown-item" href="{% url 'frontend:messages' %}"><i class="far fa-envelope"></i> შეტყობინებები</a></li>
+                            <li><a class="dropdown-item" href="{% url 'frontend:profile_settings' %}"><i class="far fa-cog"></i> პარამეტრები</a></li>
+                            
+                        </ul>
+                    </li>
+                    
+                </ul>
+                <div class="nav-right">
+                    <div class="search-btn">
+                        <button type="button" class="nav-right-link"><i class="far fa-search"></i></button>
+                    </div>
+                    <div class="cart-btn">
+                        <a href="#" class="nav-right-link"><i class="far fa-cart-plus"></i><span>0</span></a>
+                    </div>
+                    <div class="nav-right-btn mt-2">
+                        <a href="#" class="theme-btn"><span class="far fa-plus-circle"></span>Add Listing</a>
+                    </div>
+                    <div class="sidebar-btn">
+                        <button type="button" class="nav-right-link"><i class="far fa-bars-sort"></i></button>
+                    </div>
+                </div>
+            </div>
+            {% include 'partials/header/header-search.html' %}
+        </div>
+    </nav>
+</div>

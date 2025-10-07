@@ -1,0 +1,195 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}Settings{% endblock %}
+{% block stylesheet %}
+    <link rel="stylesheet" href="{% static 'css/custom-css.css' %}">
+{% endblock %}
+<body>
+
+
+    {% block content %}
+    <main class="main">
+
+        {% include 'components/breadcrumb.html' %}
+
+
+        <!-- user-profile -->
+        <div class="user-profile py-120">
+            <div class="container">
+                <div class="row">
+                    <div class="col-lg-3">
+                        {% include 'components/user-profile-area.html' %}
+                    </div>
+                    <div class="col-lg-9">
+                        <div class="user-profile-wrapper">
+                            <div class="user-profile-card profile-setting">
+                                <h4 class="user-profile-card-title">პარამეტრები</h4>
+                                <div class="row">
+                                    <div class="col-lg-6">
+                                        <h6 class="mb-3">კონფიდენციალურობის პარამეტრები</h6>
+                                        <div class="profile-privacy-setting">
+                                            <form action="#">
+                                                <div class="form-check form-switch">
+                                                    <input class="form-check-input" name="privacy-setting" value="1" type="checkbox" role="switch" id="enable_messages">
+                                                    <label class="form-check-label" for="privacy-setting-1">გზავნილების ჩართვა</label>
+                                                </div>
+                                                <div class="form-check form-switch">
+                                                    <input class="form-check-input" name="privacy-setting" value="2" type="checkbox" role="switch" id="receive_emails">
+                                                    <label class="form-check-label" for="privacy-setting-2">მინდა მივიღო ელ.ფოსტის შეტყობინებები</label>
+                                                </div>
+                                                <div class="form-check form-switch">
+                                                    <input class="form-check-input" name="privacy-setting" value="3" type="checkbox" role="switch" id="hide_email">
+                                                    <label class="form-check-label" for="privacy-setting-3">ჩემი ელ.ფოსტის დამალვა საჯაროდ</label>
+                                                </div>
+                                                <div class="form-check form-switch">
+                                                    <input class="form-check-input" name="privacy-setting" value="3" type="checkbox" role="switch" id="hide_phone">
+                                                    <label class="form-check-label" for="privacy-setting-3">ჩემი ტელეფონის ნომრის დამალვა საჯაროდ</label>
+                                                </div>
+                                                <div class="form-check form-switch">
+                                                    <input class="form-check-input" name="privacy-setting" value="4" type="checkbox" role="switch" id="receive_messages">
+                                                    <label class="form-check-label" for="privacy-setting-4">მინდა მივიღო შეტყობინებები</label>
+                                                </div>
+                                                <div class="form-check form-switch">
+                                                    <input class="form-check-input" name="privacy-setting" value="5" type="checkbox" role="switch" id="is_public">
+                                                    <label class="form-check-label" for="privacy-setting-5">საჯარო პროფილი</label>
+                                                </div>
+                                                <div class="my-4">
+                                                    <button id="save-changes-btn" type="button" class="theme-btn my-3"><span class="far fa-gear"></span> ცვლილებების შენახვა</button>
+                                                </div>
+                                            </form>
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-6">
+                                        <h6 class="mb-3">ანგარიშის წაშლა/დეაქტივაცია</h6>
+                                        <div class="user-profile-form">
+                                            <form action="#">
+                                                <div class="form-group">
+                                                    <label>პაროლი</label>
+                                                    <div class="input-container">
+                                                        <input type="password" class="form-control" placeholder="შეიყვანეთ თქვენი პაროლი" id="password">
+                                                        <i class="fas fa-eye toggle-password" onclick="togglePasswordVisibility('password')"></i>
+                                                    </div>
+                                                </div>
+                                                <div class="my-4">
+                                                    <button id="delete_acc" type="submit" class="theme-btn"><span class="far fa-trash-can"></span>წაშლა</button>
+                                                    <button id="deactivate_acc" type="submit" class="theme-btn"><span class="far fa-trash-can"></span>დეაქტივაცია</button>
+                                                </div>
+                                            </form>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- user-profile end -->
+
+    </main>
+    {% endblock content %}
+
+    {% block scripts %}
+    <script type="module" src="{% static 'js/tokens.js' %}"></script>
+    <script src="{% static 'js/auth.js' %}"></script>
+
+    <script type="module">
+        import { getProfile, handleProfileImageChange, updateProfileSettings, deleteAccount, deactivateAccount, logout } from '{% static "js/profiles.js" %}';
+        var loginUrl = "{% url 'frontend:login' %}";
+        
+        document.addEventListener('DOMContentLoaded', function() {
+            var logoutBtn = document.getElementById('profile-logout');
+        
+            logoutBtn.addEventListener('click', function() {
+                (async () => {
+                    const response = await logout(loginUrl);
+                })();
+            });
+        });
+        
+        document.addEventListener('DOMContentLoaded', function() {
+            document.getElementById('profile-settings-link').classList.add('active');
+            
+            console.log("DOMContentLoaded event fired");
+            (async () => {
+                const data = await getProfile(loginUrl);
+                console.log("data: ", data);
+
+                if (data.profile_picture) {
+                    document.getElementById('profile-picture').src = data.profile_picture;
+                } else {
+                    document.getElementById('profile-picture').src = "{% static 'img/account/user.png' %}";
+                }
+                document.getElementById('full-name').innerText = data.user.first_name + " " + data.user.last_name;
+                document.getElementById('email1').innerText = data.user.email;
+                document.getElementById('chats-count').innerText = data.chats_count;
+                
+                var enable_messages = document.getElementById('enable_messages');
+                var receive_emails = document.getElementById('receive_emails');
+                var receive_messages = document.getElementById('receive_messages');
+                var hide_email = document.getElementById('hide_email')
+                var hide_phone = document.getElementById('hide_phone');
+                var is_public = document.getElementById('is_public');
+
+                enable_messages.checked = data.enable_messages ? true : false;
+                receive_emails.checked = data.receive_emails ? true : false;
+                receive_messages.checked = data.receive_messages ? true : false;
+                hide_email.checked = data.hide_email ? true : false;
+                hide_phone.checked = data.hide_phone ? true : false;
+                is_public.checked = data.is_public ? true : false;
+                
+            })();
+        });
+
+        document.querySelector('.profile-img-file').addEventListener('change', function() {
+            (async () => {
+                const response = await handleProfileImageChange(loginUrl, this.files[0]);
+                const data = await response.json();
+                document.getElementById('profile-picture').src = data.profile_picture;
+                console.log("Profile picture updated successfully:", data);
+                
+            })();
+        });
+
+        var saveChangesBtn = document.getElementById('save-changes-btn');
+        var deleteAccountBtn = document.getElementById('delete_acc')
+        var deactivateAccountBtn = document.getElementById('deactivate_acc')
+
+        saveChangesBtn.addEventListener('click', function() {
+            (async () => {
+                const response = await updateProfileSettings(loginUrl);
+                const data = await response.json();
+                console.log("Profile settings updated successfully:", data);
+            })();
+        });
+        deleteAccountBtn.addEventListener('click', function() {
+            (async () => {
+                const response = await deleteAccount(loginUrl);
+            })();
+        });
+        deactivateAccountBtn.addEventListener('click', function() {
+            (async () => {
+                const response = await deactivateAccount(loginUrl);
+            })();
+        });
+    </script>
+
+    <script>
+        function togglePasswordVisibility(inputId) {
+            var inputField = document.getElementById(inputId);
+            var currentType = inputField.type;
+            inputField.type = currentType === "password" ? "text" : "password";
+            
+            var icon = document.querySelector(`#${inputId} + .toggle-password`);
+            icon.classList.toggle('fa-eye-slash');
+            icon.classList.toggle('fa-eye');
+        }
+    </script>   
+    
+    
+    {% endblock scripts %}
+
+</body>
+
+</html>

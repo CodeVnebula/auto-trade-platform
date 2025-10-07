@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Car Listing Details</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+        }
+        .car-details {
+            max-width: 800px;
+            margin: auto;
+        }
+        .car-title {
+            text-align: center;
+            color: #333;
+        }
+        .car-images img {
+            width: 300px;
+            height: auto;
+            margin: 10px;
+            border: 1px solid #ccc;
+            box-shadow: 2px 2px 8px rgba(0, 0, 0, 0.1);
+        }
+        .car-info {
+            margin-top: 20px;
+        }
+    </style>
+</head>
+<body>
+    <div class="car-details">
+        <h1 class="car-title">{{ car_listing.title }}</h1>
+        <p><strong>Make:</strong> {{ car_listing.main_features.make }}</p>
+        <p><strong>Model:</strong> {{ car_listing.main_features.model }}</p>
+        <p><strong>Year:</strong> {{ car_listing.main_features.year }}</p>
+        <p><strong>Price:</strong> ${{ car_listing.price.price }}</p>
+
+        <p> {{ car_listing}} </p>
+        <div class="car-images">
+            <h3>Photos:</h3>
+            {% for photo in car_listing.carphoto_set.all %}
+                <img src="{{ photo.photo.url }}" alt="Car Photo">
+            {% empty %}
+                <p>No photos available.</p>
+            {% endfor %}
+        </div>
+    </div>
+</body>
+</html>

@@ -1,0 +1,230 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}Dashboard{% endblock %}
+
+<body>
+
+    {% block content %}
+    <main class="main">
+
+        {% include 'components/breadcrumb.html' %}
+
+
+        <!-- user-profile -->
+        <div class="user-profile py-120">
+            <div class="container">
+                <div class="row">
+                    <div class="col-lg-3">
+
+                        {% include 'components/user-profile-area.html' %}
+
+                    </div>
+                    <div class="col-lg-9">
+                        <div class="user-profile-wrapper">
+                            
+                            <div class="row">
+                                <div class="col-md-6 col-lg-4">
+                                    <div class="dashboard-widget dashboard-widget-color-1">
+                                        <div class="dashboard-widget-info">
+                                            <h1 id="active-listing"></h1>
+                                            <span>აქტიური განცხადება</span>
+                                        </div>
+                                        <div class="dashboard-widget-icon">
+                                            <i class="fal fa-list"></i>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-6 col-lg-4">
+                                    <div class="dashboard-widget dashboard-widget-color-2">
+                                        <div class="dashboard-widget-info">
+                                            <h1 id="total-views"></h1>
+                                            <span>ნახვა</span>
+                                        </div>
+                                        <div class="dashboard-widget-icon">
+                                            <i class="fal fa-eye"></i>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-6 col-lg-4">
+                                    <div class="dashboard-widget dashboard-widget-color-3">
+                                        <div class="dashboard-widget-info">
+                                            <h1 id="total-listing"></h1>
+                                            <span>ყველა განცხადება</span>
+                                        </div>
+                                        <div class="dashboard-widget-icon">
+                                            <i class="fal fa-layer-group"></i>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="row">
+                                <div class="col-lg-12">
+                                    <div class="user-profile-card">
+                                        <h4 class="user-profile-card-title">Recent Listing</h4>
+                                        <div class="table-responsive">
+                                            <table class="table text-nowrap">
+                                                <thead>
+                                                    <tr>
+                                                        <th>დეტალები</th>
+                                                        <th>მდებარეობა</th>
+                                                        <th>გამოქვეყნებულია</th>
+                                                        <th>ფასი</th>
+                                                        <th>ნახვა</th>
+                                                        <th>სტატუსი</th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody>
+                                                    
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- user-profile end -->
+
+    </main>
+    {% endblock content %}
+
+    {% block scripts %}
+    <script type="module" src="{% static 'js/tokens.js' %}"></script>
+
+    <script type="module">
+        import { getProfile, handleProfileImageChange, getStats, getUserListings, logout } from '{% static "js/profiles.js" %}';
+        var loginUrl = "{% url 'frontend:login' %}";
+
+        document.addEventListener('DOMContentLoaded', function() {
+            var logoutBtn = document.getElementById('profile-logout');
+        
+            logoutBtn.addEventListener('click', function() {
+                (async () => {
+                    const response = await logout(loginUrl);
+                })();
+            });
+        });
+    
+
+        document.addEventListener('DOMContentLoaded', function() {
+            document.getElementById('dashboard-link').classList.add('active');
+            
+            console.log("DOMContentLoaded event fired");
+            (async () => {
+                const data = await getProfile(loginUrl);
+                console.log("data: ", data);
+
+                if (data.profile_picture) {
+                    document.getElementById('profile-picture').src = data.profile_picture;
+                } else {
+                    document.getElementById('profile-picture').src = "{% static 'img/account/user.png' %}";
+                }
+                document.getElementById('full-name').innerText = data.user.first_name + " " + data.user.last_name;
+                document.getElementById('email1').innerText = data.user.email;
+                document.getElementById('chats-count').innerText = data.chats_count;
+            })();
+
+            (async () => {
+                const stats = await getStats(loginUrl);
+                
+                document.getElementById('active-listing').innerText = stats.active_listings_count;
+                document.getElementById('total-views').innerText = stats.total_views;
+                document.getElementById('total-listing').innerText = stats.total_listings_count;
+            })();
+
+            (async () => {
+                const response = await getUserListings(loginUrl);
+                createCarListings(response.results);
+            })();
+        });
+
+        async function createCarListings(cars) {
+            const carListContainer = document.querySelector('tbody');
+            carListContainer.innerHTML = "";
+
+            console.log("Cars: ", cars);
+
+            cars.forEach((car) => {
+                const make = car.main_features.make.title;
+                const model = car.main_features.model.title;
+                const year = car.main_features.year;
+                const price = car.price.price;
+                
+                const location = car.location.title;
+                const isCleared = car.is_cleared;
+                const priceNegotiable = car.price.price_negotiable;
+                const createdAt = timeAgo(car.created_at);
+                const views = car.views;
+                const imageUrl = car.first_photo.photo; 
+                const isActive = car.is_active;
+
+                const carHTML = `
+                    <tr>
+                        <td>
+                            <div class="table-list-info">
+                                <a href="#">
+                                    <img src="${imageUrl}" alt="">
+                                    <div class="table-list-content">
+                                        <h6>${make} ${model}</h6>
+                                        <span>${year}</span>
+                                    </div>
+                                </a>
+                            </div>
+                        </td>
+                        <td>${location}</td>
+                        <td>${createdAt}</td>
+                        <td>${priceNegotiable ? 'შეთანხმებით' : `$${price}`}</td>
+                        <td>${views}</td>
+                        <td><span class="badge ${isActive ? 'badge-success' : 'badge-danger'}">${isActive ? 'აქტიური' : 'არააქტიური'}</span></td>
+                    </tr>
+                `;
+                carListContainer.insertAdjacentHTML('beforeend', carHTML);
+            });
+        }
+        function timeAgo(dateString) {
+            const date = new Date(dateString).toLocaleString()
+            const now = new Date();
+            const createdTime = new Date(date);
+            const diffInSeconds = Math.floor((now - createdTime) / 1000);
+        
+            if (diffInSeconds < 60) {
+                return `${diffInSeconds} წამის წინ`;
+            } else if (diffInSeconds < 3600) {
+                const minutes = Math.floor(diffInSeconds / 60);
+                return `${minutes} წუთის წინ`;
+            } else if (diffInSeconds < 86400) {
+                const hours = Math.floor(diffInSeconds / 3600);
+                return `${hours} საათის წინ`;
+            } else if (diffInSeconds < 2592000) {
+                const days = Math.floor(diffInSeconds / 86400);
+                return `${days} დღის წინ`;
+            } else if (diffInSeconds < 31536000) {
+                const months = Math.floor(diffInSeconds / 2592000);
+                return `${months} თვის წინ`;
+            } else {
+            const years = Math.floor(diffInSeconds / 31536000);
+                return `${years} წლის წინ`;
+            }
+        }
+
+        document.querySelector('.profile-img-file').addEventListener('change', function() {
+            (async () => {
+                const response = await handleProfileImageChange(loginUrl, this.files[0]);
+                const data = await response.json();
+                document.getElementById('profile-picture').src = data.profile_picture;
+                console.log("Profile picture updated successfully:", data);
+                
+            })();
+        });
+
+    </script>  
+    {% endblock scripts %}
+
+</body>
+
+</html>

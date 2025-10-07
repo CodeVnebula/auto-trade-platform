@@ -1,0 +1,23 @@
+<div class="user-profile-sidebar">
+    <div class="user-profile-sidebar-top">
+        <div class="user-profile-img">
+            <img id='profile-picture' src="assets/img/account/user.jpg" alt="">
+            <button type="button" class="profile-img-btn"><i class="far fa-camera"></i></button>
+            <input type="file" class="profile-img-file">
+        </div>
+        <h5 id='full-name'></h5>
+        <p><a id="email1" style="text-decoration: underline; cursor: pointer;"></a></p>
+    </div>
+    <ul class="user-profile-sidebar-list">
+        <li><a id="dashboard-link" href="{% url 'frontend:dashboard' %}"><i class="far fa-gauge-high"></i> მთავარი</a></li>
+        <li><a id="profile-link" href="{% url 'frontend:profile' %}"><i class="far fa-user"></i> ჩემი პროფილი</a></li>
+        <li><a id="profile-listings-link" href="{% url 'frontend:profile_listings' %}"><i class="far fa-layer-group"></i> ჩემი განცხადებები</a></li>
+        <li><a id="add-listing-link" href="{% url 'frontend:add_listing' %}"><i class="far fa-plus-circle"></i> განცხადების დამატება</a></li>
+        <li><a id="favourites-link" href="{% url 'frontend:favourites' %}"><i class="far fa-heart"></i> ფავორიტები</a></li>
+        <li><a id="compare-link" href="{% url 'frontend:compare' %}"><i class="far fa-exchange-alt"></i> შედარება</a></li>
+        <li><a id="messages-link" href="{% url 'frontend:messages' %}"><i class="far fa-envelope"></i> შეტყობინებები <span id="chats-count" class="badge badge-danger"></span></a></li>
+        <li><a id="profile-settings-link" href="{% url 'frontend:profile_settings' %}"><i class="far fa-gear"></i> პარამეტრები</a></li>
+        <li><a id="profile-logout" href="#"><i class="far fa-sign-out"></i> გამოსვლა</a></li>
+    </ul>
+</div>
+
